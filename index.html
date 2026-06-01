@@ -25,566 +25,256 @@
   }
 
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.6; min-height: 100vh; }
 
   /* ── HEADER ── */
   header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--paper);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 3rem;
-    height: 64px;
+    position: sticky; top: 0; z-index: 100;
+    background: var(--paper); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
   }
-
   .logo {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--ink);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    letter-spacing: -0.02em;
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; font-weight: 600;
+    color: var(--ink); text-decoration: none; display: flex; align-items: center;
+    gap: 10px; letter-spacing: -0.02em;
   }
-  .logo-pip {
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    height: 100%;
-  }
-
+  .logo-pip { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  nav { display: flex; align-items: center; gap: 0.25rem; height: 100%; }
   nav a {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding: 0 1rem;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--ink-light);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s, border-color 0.15s;
-    letter-spacing: 0.01em;
+    display: flex; align-items: center; height: 100%; padding: 0 1rem;
+    font-size: 0.85rem; font-weight: 400; color: var(--ink-light); text-decoration: none;
+    border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; letter-spacing: 0.01em;
+    cursor: pointer;
   }
   nav a:hover { color: var(--ink); }
   nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
+  .header-actions { display: flex; align-items: center; gap: 0.5rem; }
+  .search-wrap { position: relative; }
   .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--paper-warm);
-    border: 1px solid var(--border-mid);
-    border-radius: 99px;
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-    color: var(--ink-light);
-    cursor: text;
-    transition: border-color 0.15s, background 0.15s;
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--paper-warm); border: 1px solid var(--border-mid);
+    border-radius: 99px; padding: 0.4rem 1rem; font-size: 0.8rem;
+    color: var(--ink-light); cursor: text; transition: border-color 0.15s, background 0.15s;
+    min-width: 180px;
   }
-  .search-bar:hover {
-    border-color: var(--accent-light);
-    background: #fff;
-  }
+  .search-bar:hover { border-color: var(--accent-light); background: #fff; }
   .search-bar svg { width: 14px; height: 14px; opacity: 0.5; flex-shrink: 0; }
-
+  .search-input {
+    background: none; border: none; outline: none; font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; color: var(--ink); width: 100%; min-width: 120px;
+  }
+  .search-input::placeholder { color: var(--ink-light); }
+  .search-clear {
+    background: none; border: none; cursor: pointer; padding: 0; color: var(--ink-light);
+    display: none; align-items: center; line-height: 1;
+  }
+  .search-clear svg { width: 12px; height: 12px; }
   .btn-add {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 99px;
-    padding: 0.45rem 1rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: background 0.15s;
-    letter-spacing: 0.01em;
+    display: flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff;
+    border: none; border-radius: 99px; padding: 0.45rem 1rem; font-size: 0.8rem; font-weight: 500;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.15s; letter-spacing: 0.01em;
   }
   .btn-add:hover { background: #A8421C; }
   .btn-add svg { width: 13px; height: 13px; }
 
   /* ── HERO BAND ── */
   .hero {
-    background: var(--ink);
-    padding: 5rem 3rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    background: var(--ink); padding: 5rem 3rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; overflow: hidden;
   }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    right: -80px; top: -80px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    border: 1px solid rgba(192,82,42,0.18);
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    right: -30px; top: -30px;
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    border: 1px solid rgba(192,82,42,0.1);
-  }
-
+  .hero::before { content: ''; position: absolute; right: -80px; top: -80px; width: 400px; height: 400px; border-radius: 50%; border: 1px solid rgba(192,82,42,0.18); }
+  .hero::after  { content: ''; position: absolute; right: -30px; top: -30px; width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(192,82,42,0.1); }
   .hero-text { position: relative; z-index: 2; }
-
-  .hero-eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    font-weight: 500;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-title {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(2.8rem, 5vw, 4rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--paper);
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--accent-light);
-  }
-
-  .hero-desc {
-    font-size: 0.95rem;
-    color: rgba(250,247,242,0.55);
-    max-width: 380px;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); font-weight: 500; margin-bottom: 1.25rem; }
+  .hero-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 300; line-height: 1.05; color: var(--paper); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--accent-light); }
+  .hero-desc { font-size: 0.95rem; color: rgba(250,247,242,0.55); max-width: 380px; line-height: 1.7; font-weight: 300; }
   .hero-stats {
-    position: relative; z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.07);
+    position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07);
   }
-
-  .stat-cell {
-    background: rgba(26,22,16,0.8);
-    padding: 2rem 1.75rem;
-    transition: background 0.2s;
-  }
+  .stat-cell { background: rgba(26,22,16,0.8); padding: 2rem 1.75rem; transition: background 0.2s; }
   .stat-cell:hover { background: rgba(40,33,24,0.9); }
-
-  .stat-num {
-    font-family: 'Fraunces', serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--paper);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-  .stat-num span {
-    font-size: 1.2rem;
-    color: var(--accent-light);
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    color: rgba(250,247,242,0.4);
-    letter-spacing: 0.05em;
-    font-weight: 300;
-  }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 300; color: var(--paper); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num span { font-size: 1.2rem; color: var(--accent-light); }
+  .stat-label { font-size: 0.75rem; color: rgba(250,247,242,0.4); letter-spacing: 0.05em; font-weight: 300; }
 
   /* ── FILTER BAR ── */
   .filter-bar {
-    padding: 1.25rem 3rem;
-    background: var(--paper-warm);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    overflow-x: auto;
+    padding: 1.25rem 3rem; background: var(--paper-warm); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;
   }
-
-  .filter-label {
-    font-size: 0.75rem;
-    color: var(--ink-light);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-    margin-right: 0.5rem;
-  }
-
+  .filter-label { font-size: 0.75rem; color: var(--ink-light); font-weight: 500; letter-spacing: 0.05em; white-space: nowrap; margin-right: 0.5rem; }
   .filter-pill {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.35rem 0.85rem;
-    border-radius: 99px;
-    border: 1px solid var(--border-mid);
-    background: transparent;
-    font-size: 0.8rem;
-    color: var(--ink-mid);
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.15s;
+    display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.85rem;
+    border-radius: 99px; border: 1px solid var(--border-mid); background: transparent;
+    font-size: 0.8rem; color: var(--ink-mid); font-family: 'DM Sans', sans-serif;
+    cursor: pointer; white-space: nowrap; transition: all 0.15s;
   }
-  .filter-pill:hover {
-    background: var(--paper);
-    border-color: var(--accent-light);
-    color: var(--accent);
-  }
-  .filter-pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-
-  .filter-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .filter-pill:hover { background: var(--paper); border-color: var(--accent-light); color: var(--accent); }
+  .filter-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filter-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
   /* ── MAIN LAYOUT ── */
-  .page-body {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    min-height: calc(100vh - 64px - 80px - 60px);
-  }
+  .page-body { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 64px - 80px - 60px); }
 
   /* ── SIDEBAR ── */
   aside {
-    border-right: 1px solid var(--border);
-    padding: 2rem 0;
-    background: var(--paper);
-    position: sticky;
-    top: 64px;
-    height: calc(100vh - 64px);
-    overflow-y: auto;
+    border-right: 1px solid var(--border); padding: 2rem 0; background: var(--paper);
+    position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
   }
-
   .aside-section { margin-bottom: 2rem; }
-
-  .aside-heading {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    padding: 0 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
+  .aside-heading { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); padding: 0 1.5rem; margin-bottom: 0.5rem; }
   .aside-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem 1.5rem;
-    font-size: 0.85rem;
-    color: var(--ink-mid);
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.1s, color 0.1s;
-    border-right: 2px solid transparent;
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.5rem;
+    font-size: 0.85rem; color: var(--ink-mid); cursor: pointer; text-decoration: none;
+    transition: background 0.1s, color 0.1s; border-right: 2px solid transparent;
+    background: none; border-left: none; border-top: none; border-bottom: none;
+    width: 100%; text-align: left; font-family: 'DM Sans', sans-serif;
   }
   .aside-item:hover { background: var(--paper-warm); color: var(--ink); }
-  .aside-item.active {
-    color: var(--ink);
-    font-weight: 500;
-    background: var(--paper-warm);
-    border-right-color: var(--accent);
-  }
+  .aside-item.active { color: var(--ink); font-weight: 500; background: var(--paper-warm); border-right-color: var(--accent); }
   .aside-item svg { width: 15px; height: 15px; opacity: 0.6; flex-shrink: 0; }
   .aside-item.active svg { opacity: 1; }
-
-  .aside-count {
-    margin-left: auto;
-    font-size: 0.7rem;
-    background: var(--paper-mid);
-    border-radius: 10px;
-    padding: 1px 7px;
-    color: var(--ink-light);
-    font-weight: 400;
-  }
-
-  .aside-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0.75rem 1.5rem 1.25rem;
-  }
+  .aside-count { margin-left: auto; font-size: 0.7rem; background: var(--paper-mid); border-radius: 10px; padding: 1px 7px; color: var(--ink-light); font-weight: 400; }
+  .aside-divider { height: 1px; background: var(--border); margin: 0.75rem 1.5rem 1.25rem; }
 
   /* ── RECIPE GRID ── */
-  main {
-    padding: 2.5rem 3rem;
-  }
-
-  .grid-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-  }
-
-  .grid-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-  .grid-title span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--ink-light);
-    margin-left: 0.75rem;
-    vertical-align: middle;
-  }
-
-  .sort-select {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--ink-mid);
-  }
+  main { padding: 2.5rem 3rem; }
+  .grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+  .grid-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: -0.01em; color: var(--ink); }
+  .grid-title span { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 400; color: var(--ink-light); margin-left: 0.75rem; vertical-align: middle; }
+  .sort-select { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--ink-mid); }
   .sort-select select {
-    background: var(--paper-warm);
-    border: 1px solid var(--border-mid);
-    border-radius: 6px;
-    padding: 0.35rem 0.6rem;
-    font-size: 0.8rem;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    outline: none;
-    cursor: pointer;
+    background: var(--paper-warm); border: 1px solid var(--border-mid); border-radius: 6px;
+    padding: 0.35rem 0.6rem; font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
+    color: var(--ink); outline: none; cursor: pointer;
   }
-
-  .recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.25rem;
-  }
+  .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
 
   /* ── RECIPE CARD ── */
   .recipe-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.2s;
-    animation: fadeUp 0.4s ease both;
-    text-decoration: none;
-    color: inherit;
-    display: block;
+    background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.4s ease both; text-decoration: none; color: inherit; display: block;
   }
-  .recipe-card:hover {
-    border-color: var(--border-mid);
-    transform: translateY(-3px);
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .recipe-card:nth-child(1) { animation-delay: 0.05s; }
-  .recipe-card:nth-child(2) { animation-delay: 0.1s; }
-  .recipe-card:nth-child(3) { animation-delay: 0.15s; }
-  .recipe-card:nth-child(4) { animation-delay: 0.2s; }
-  .recipe-card:nth-child(5) { animation-delay: 0.25s; }
-  .recipe-card:nth-child(6) { animation-delay: 0.3s; }
+  .recipe-card:hover { border-color: var(--border-mid); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,22,16,0.08); }
+  .recipe-card.hidden { display: none; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
   .card-thumb {
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.5rem;
-    position: relative;
-    overflow: hidden;
+    height: 160px; display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; position: relative; overflow: hidden;
   }
-
   .card-thumb-greek    { background: #F5DDD4; }
   .card-thumb-italian  { background: #E4EBD0; }
   .card-thumb-japanese { background: #FFF0E0; }
   .card-thumb-french   { background: #EAE4F5; }
   .card-thumb-indian   { background: #FFF4D8; }
   .card-thumb-mexican  { background: #F5F0DA; }
+  .card-thumb-spanish  { background: #FDECD3; }
+  .card-thumb-thai     { background: #E8F5E4; }
 
   .card-badge {
-    position: absolute;
-    top: 10px; left: 10px;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 99px;
-    background: rgba(26,22,16,0.65);
-    color: rgba(250,247,242,0.9);
+    position: absolute; top: 10px; left: 10px; font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px;
+    background: rgba(26,22,16,0.65); color: rgba(250,247,242,0.9);
   }
-
   .card-fav {
-    position: absolute;
-    top: 10px; right: 10px;
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.85);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: background 0.15s;
+    position: absolute; top: 10px; right: 10px; width: 28px; height: 28px;
+    border-radius: 50%; background: rgba(255,255,255,0.85);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s;
   }
   .card-fav:hover { background: #fff; }
-  .card-fav svg { width: 14px; height: 14px; color: var(--ink-light); }
+  .card-fav svg { width: 14px; height: 14px; color: var(--ink-light); transition: color 0.15s; }
   .card-fav.active svg { color: var(--accent); fill: var(--accent); }
 
-  .card-body {
-    padding: 1rem 1.1rem 1.2rem;
-  }
-
-  .card-cuisine {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.35rem;
-  }
-
-  .card-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.25;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-  }
-
-  .card-desc {
-    font-size: 0.8rem;
-    color: var(--ink-light);
-    line-height: 1.5;
-    margin-bottom: 0.9rem;
-    font-weight: 300;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.75rem;
-    color: var(--ink-light);
-    border-top: 1px solid var(--border);
-    padding-top: 0.8rem;
-  }
-  .card-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
+  .card-body { padding: 1rem 1.1rem 1.2rem; }
+  .card-cuisine { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+  .card-title { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.25; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+  .card-desc { font-size: 0.8rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 0.9rem; font-weight: 300; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; color: var(--ink-light); border-top: 1px solid var(--border); padding-top: 0.8rem; }
+  .card-meta-item { display: flex; align-items: center; gap: 0.3rem; }
   .card-meta-item svg { width: 12px; height: 12px; }
 
   /* ── ADD CARD ── */
   .card-add {
-    border: 1.5px dashed var(--border-mid);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    padding: 2rem;
-    color: var(--ink-light);
-    min-height: 280px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-    text-decoration: none;
-    animation: fadeUp 0.4s ease 0.35s both;
+    border: 1.5px dashed var(--border-mid); border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; cursor: pointer; padding: 2rem; color: var(--ink-light); min-height: 280px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none;
+    animation: fadeUp 0.4s ease 0.35s both; background: none; width: 100%;
+    font-family: 'DM Sans', sans-serif;
   }
-  .card-add:hover {
-    background: var(--paper-warm);
-    border-color: var(--accent-light);
-    color: var(--accent);
-  }
-  .card-add-icon {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    border: 1.5px dashed currentColor;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .card-add:hover { background: var(--paper-warm); border-color: var(--accent-light); color: var(--accent); }
+  .card-add-icon { width: 40px; height: 40px; border-radius: 50%; border: 1.5px dashed currentColor; display: flex; align-items: center; justify-content: center; }
   .card-add-icon svg { width: 18px; height: 18px; }
   .card-add p { font-size: 0.85rem; font-weight: 500; }
   .card-add small { font-size: 0.75rem; opacity: 0.7; }
 
+  /* ── EMPTY STATE ── */
+  .empty-state { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--ink-light); }
+  .empty-state svg { width: 40px; height: 40px; margin-bottom: 1rem; opacity: 0.3; }
+  .empty-state h3 { font-family: 'Fraunces', serif; font-weight: 300; font-size: 1.25rem; color: var(--ink-mid); margin-bottom: 0.5rem; }
+  .empty-state p { font-size: 0.85rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(26,22,16,0.55); z-index: 500;
+    display: flex; align-items: center; justify-content: center; padding: 2rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--paper); border-radius: 20px; width: 100%; max-width: 520px;
+    padding: 2.5rem; position: relative; transform: translateY(16px);
+    transition: transform 0.2s; box-shadow: 0 24px 64px rgba(26,22,16,0.2);
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.25rem; background: var(--paper-warm);
+    border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; color: var(--ink-light);
+    transition: background 0.15s, color 0.15s;
+  }
+  .modal-close:hover { background: var(--paper-mid); color: var(--ink); }
+  .modal-close svg { width: 14px; height: 14px; }
+  .modal-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 0.35rem; }
+  .modal-sub { font-size: 0.85rem; color: var(--ink-light); margin-bottom: 2rem; font-weight: 300; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.5rem; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: var(--paper-warm); border: 1px solid var(--border-mid);
+    border-radius: 10px; padding: 0.65rem 1rem; font-size: 0.875rem; font-family: 'DM Sans', sans-serif;
+    color: var(--ink); outline: none; transition: border-color 0.15s, background 0.15s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent-light); background: #fff; }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-actions { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+  .btn-cancel {
+    flex: 1; background: var(--paper-warm); border: 1px solid var(--border-mid); border-radius: 99px;
+    padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    color: var(--ink-mid); cursor: pointer; transition: background 0.15s;
+  }
+  .btn-cancel:hover { background: var(--paper-mid); }
+  .btn-save {
+    flex: 2; background: var(--accent); border: none; border-radius: 99px;
+    padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    color: #fff; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-save:hover { background: #A8421C; }
+
+  /* ── VIEW PANELS ── */
+  .view-panel { display: none; }
+  .view-panel.active { display: contents; }
+
   /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    padding: 2.5rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--accent-light);
-  }
-
-  .footer-text {
-    font-size: 0.8rem;
-    color: rgba(250,247,242,0.3);
-    font-weight: 300;
-  }
+  footer { background: var(--ink); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; font-style: italic; color: var(--accent-light); }
+  .footer-text { font-size: 0.8rem; color: rgba(250,247,242,0.3); font-weight: 300; }
 
   @media (max-width: 900px) {
     header { padding: 0 1.5rem; }
@@ -595,6 +285,7 @@
     main { padding: 1.5rem; }
     .filter-bar { padding: 1rem 1.5rem; }
     footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -602,24 +293,22 @@
 
 <!-- HEADER -->
 <header>
-  <a href="#" class="logo">
-    <div class="logo-pip"></div>
-    Yummy
-  </a>
-
+  <a href="index.html" class="logo"><div class="logo-pip"></div>Yummy</a>
   <nav>
-    <a href="#" class="active">All recipes</a>
-    <a href="#">Collections</a>
-    <a href="#">Favourites</a>
-    <a href="#">About</a>
+    <a href="#" class="active" id="nav-all" onclick="showView('all',this)">All recipes</a>
+    <a href="#" id="nav-collections" onclick="showView('collections',this)">Collections</a>
+    <a href="#" id="nav-favourites" onclick="showView('favourites',this)">Favourites</a>
+    <a href="#" id="nav-about" onclick="showView('about',this)">About</a>
   </nav>
-
   <div class="header-actions">
     <div class="search-bar">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M11 11l3 3"/></svg>
-      Search recipes…
+      <input type="text" class="search-input" id="search-input" placeholder="Search recipes…" oninput="handleSearch(this)">
+      <button class="search-clear" id="search-clear" onclick="clearSearch()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
     </div>
-    <button class="btn-add">
+    <button class="btn-add" onclick="openModal()">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10"/></svg>
       Add recipe
     </button>
@@ -630,55 +319,27 @@
 <section class="hero">
   <div class="hero-text">
     <p class="hero-eyebrow">Your personal cookbook</p>
-    <h1 class="hero-title">
-      Everything that<br>
-      <em>tastes good.</em>
-    </h1>
+    <h1 class="hero-title">Everything that<br><em>tastes good.</em></h1>
     <p class="hero-desc">A growing collection of recipes worth making again. No ads, no life stories — just the food.</p>
   </div>
-
   <div class="hero-stats">
-    <div class="stat-cell">
-      <div class="stat-num">12<span>+</span></div>
-      <div class="stat-label">Recipes saved</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Cuisines</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">4</div>
-      <div class="stat-label">Favourites</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">1<span>h</span></div>
-      <div class="stat-label">Avg cook time</div>
-    </div>
+    <div class="stat-cell"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Recipes saved</div></div>
+    <div class="stat-cell"><div class="stat-num" id="stat-cuisines">0</div><div class="stat-label">Cuisines</div></div>
+    <div class="stat-cell"><div class="stat-num" id="stat-favs">0</div><div class="stat-label">Favourites</div></div>
+    <div class="stat-cell"><div class="stat-num" id="stat-time">—</div><div class="stat-label">Avg cook time</div></div>
   </div>
 </section>
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <span class="filter-label">Filter:</span>
-  <button class="filter-pill active" onclick="setFilter(this, 'all')">All</button>
-  <button class="filter-pill" onclick="setFilter(this, 'greek')">
-    <span class="filter-dot" style="background:#C0522A"></span>Greek
-  </button>
-  <button class="filter-pill" onclick="setFilter(this, 'italian')">
-    <span class="filter-dot" style="background:#4A6B2A"></span>Italian
-  </button>
-  <button class="filter-pill" onclick="setFilter(this, 'japanese')">
-    <span class="filter-dot" style="background:#D4A030"></span>Japanese
-  </button>
-  <button class="filter-pill" onclick="setFilter(this, 'french')">
-    <span class="filter-dot" style="background:#7A5ABF"></span>French
-  </button>
-  <button class="filter-pill" onclick="setFilter(this, 'quick')">
-    <span class="filter-dot" style="background:#2A8A7A"></span>Under 30 min
-  </button>
-  <button class="filter-pill" onclick="setFilter(this, 'vegetarian')">
-    <span class="filter-dot" style="background:#6A9A2A"></span>Vegetarian
-  </button>
+  <button class="filter-pill active" onclick="setFilter(this,'all')">All</button>
+  <button class="filter-pill" onclick="setFilter(this,'greek')"><span class="filter-dot" style="background:#C0522A"></span>Greek</button>
+  <button class="filter-pill" onclick="setFilter(this,'italian')"><span class="filter-dot" style="background:#4A6B2A"></span>Italian</button>
+  <button class="filter-pill" onclick="setFilter(this,'japanese')"><span class="filter-dot" style="background:#D4A030"></span>Japanese</button>
+  <button class="filter-pill" onclick="setFilter(this,'french')"><span class="filter-dot" style="background:#7A5ABF"></span>French</button>
+  <button class="filter-pill" onclick="setFilter(this,'quick')"><span class="filter-dot" style="background:#2A8A7A"></span>Under 30 min</button>
+  <button class="filter-pill" onclick="setFilter(this,'vegetarian')"><span class="filter-dot" style="background:#6A9A2A"></span>Vegetarian</button>
 </div>
 
 <!-- PAGE BODY -->
@@ -688,259 +349,119 @@
   <aside>
     <div class="aside-section">
       <div class="aside-heading">Browse</div>
-      <a href="#" class="aside-item active">
+      <button class="aside-item active" id="aside-all" onclick="showView('all', document.getElementById('nav-all'))">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
-        All recipes
-        <span class="aside-count">12</span>
-      </a>
-      <a href="#" class="aside-item">
+        All recipes <span class="aside-count" id="aside-count-all">0</span>
+      </button>
+      <button class="aside-item" id="aside-favs" onclick="showView('favourites', document.getElementById('nav-favourites'))">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2.5L9.8 6.2l4.2.6-3 2.9.7 4.1L8 11.7l-3.7 2.1.7-4.1-3-2.9 4.2-.6z"/></svg>
-        Favourites
-        <span class="aside-count">4</span>
-      </a>
-      <a href="#" class="aside-item">
+        Favourites <span class="aside-count" id="aside-count-favs">0</span>
+      </button>
+      <button class="aside-item" id="aside-recent" onclick="sortRecipes('recent')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
         Recently added
-      </a>
+      </button>
     </div>
 
     <div class="aside-divider"></div>
 
     <div class="aside-section">
       <div class="aside-heading">Cuisine</div>
-      <a href="#" class="aside-item">
+      <button class="aside-item" onclick="sidebarFilter('greek')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Greek
-        <span class="aside-count">3</span>
-      </a>
-      <a href="#" class="aside-item">
+        Greek <span class="aside-count" id="cuisine-count-greek">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('italian')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Italian
-        <span class="aside-count">2</span>
-      </a>
-      <a href="#" class="aside-item">
+        Italian <span class="aside-count" id="cuisine-count-italian">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('japanese')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Japanese
-        <span class="aside-count">1</span>
-      </a>
-      <a href="#" class="aside-item">
+        Japanese <span class="aside-count" id="cuisine-count-japanese">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('french')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        French
-        <span class="aside-count">2</span>
-      </a>
-      <a href="#" class="aside-item" style="color:var(--ink-light); font-style:italic;">
+        French <span class="aside-count" id="cuisine-count-french">0</span>
+      </button>
+      <button class="aside-item" style="color:var(--ink-light); font-style:italic;" onclick="openModal()">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
         Add cuisine…
-      </a>
+      </button>
     </div>
 
     <div class="aside-divider"></div>
 
     <div class="aside-section">
       <div class="aside-heading">Tags</div>
-      <a href="#" class="aside-item">
+      <button class="aside-item" onclick="sidebarFilter('vegetarian')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
         Vegetarian
-      </a>
-      <a href="#" class="aside-item">
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('weekend')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
         Weekend cook
-      </a>
-      <a href="#" class="aside-item">
+      </button>
+      <button class="aside-item" onclick="setFilter(document.querySelector('.filter-pill[onclick*=quick]'),'quick')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
         Weeknight
-      </a>
+      </button>
     </div>
   </aside>
 
   <!-- MAIN -->
-  <main>
-    <div class="grid-header">
-      <div class="grid-title">
-        All recipes
-        <span id="recipe-count">12 recipes</span>
+  <main id="main-content">
+
+    <!-- ALL RECIPES VIEW -->
+    <div id="view-all">
+      <div class="grid-header">
+        <div class="grid-title">All recipes <span id="recipe-count">0 recipes</span></div>
+        <div class="sort-select">
+          <span style="color:var(--ink-light)">Sort:</span>
+          <select id="sort-select" onchange="sortRecipes(this.value)">
+            <option value="recent">Recently added</option>
+            <option value="az">A – Z</option>
+            <option value="time">Cook time</option>
+            <option value="cuisine">Cuisine</option>
+          </select>
+        </div>
       </div>
-      <div class="sort-select">
-        <span style="color:var(--ink-light)">Sort:</span>
-        <select>
-          <option>Recently added</option>
-          <option>A – Z</option>
-          <option>Cook time</option>
-          <option>Cuisine</option>
-        </select>
+      <div class="recipe-grid" id="recipe-grid"></div>
+    </div>
+
+    <!-- FAVOURITES VIEW -->
+    <div id="view-favourites" style="display:none">
+      <div class="grid-header">
+        <div class="grid-title">Favourites <span id="fav-count">0 recipes</span></div>
+      </div>
+      <div class="recipe-grid" id="fav-grid"></div>
+    </div>
+
+    <!-- COLLECTIONS VIEW -->
+    <div id="view-collections" style="display:none">
+      <div class="grid-header">
+        <div class="grid-title">Collections</div>
+      </div>
+      <div style="padding: 3rem 0; text-align: center; color: var(--ink-light);">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" style="width:48px;height:48px;margin-bottom:1rem;opacity:0.3;display:block;margin-left:auto;margin-right:auto"><rect x="4" y="8" width="14" height="18" rx="2"/><rect x="22" y="8" width="14" height="18" rx="2"/><rect x="4" y="30" width="14" height="6" rx="2"/><rect x="22" y="30" width="14" height="6" rx="2"/></svg>
+        <p style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:var(--ink-mid);margin-bottom:0.5rem;">No collections yet</p>
+        <p style="font-size:0.85rem;">Group your recipes into themed collections — weeknight dinners, dinner party showstoppers, summer salads…</p>
+        <button onclick="openModal()" style="margin-top:1.5rem;background:var(--accent);color:#fff;border:none;border-radius:99px;padding:0.6rem 1.4rem;font-size:0.85rem;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;">Add your first recipe</button>
       </div>
     </div>
 
-    <div class="recipe-grid" id="recipe-grid">
-
-      <a href="recipe.html" class="recipe-card" data-cuisine="greek" data-tags="vegetarian weekend">
-        <div class="card-thumb card-thumb-greek">
-          🍅
-          <span class="card-badge">Greek</span>
-          <div class="card-fav" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
+    <!-- ABOUT VIEW -->
+    <div id="view-about" style="display:none">
+      <div style="max-width: 560px; padding: 1rem 0 3rem;">
+        <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:-0.02em;margin-bottom:1.5rem;color:var(--ink);">About Yummy</h2>
+        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Yummy is your personal recipe collection — a place to save the things you actually cook, without the noise. No ads, no 1,200-word backstory about a summer in Tuscany before you get to the ingredients.</p>
+        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Just the recipes. Organised by cuisine, filtered by time, saved with a heart.</p>
+        <p style="color:var(--ink-mid);line-height:1.8;font-size:0.95rem;">Add your own recipes using the <strong style="font-weight:500;color:var(--ink)">Add recipe</strong> button. Your collection lives in your browser and stays with you.</p>
+        <div style="margin-top:2.5rem;padding:1.5rem;background:var(--paper-warm);border-radius:14px;border:1px solid var(--border);">
+          <p style="font-size:0.8rem;color:var(--ink-light);line-height:1.7;">Built with care. Hosted on GitHub. Recipes belong to the people who cook them.</p>
         </div>
-        <div class="card-body">
-          <div class="card-cuisine">Greek</div>
-          <div class="card-title">Gemista</div>
-          <div class="card-desc">Tomatoes & peppers stuffed with herby rice, slow-roasted until caramelised and golden.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              90 min
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Serves 8
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg>
-              Easy
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="recipe-card" data-cuisine="italian">
-        <div class="card-thumb card-thumb-italian">
-          🍝
-          <span class="card-badge">Italian</span>
-          <div class="card-fav" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-cuisine">Italian</div>
-          <div class="card-title">Cacio e pepe</div>
-          <div class="card-desc">Three ingredients. One perfect Roman pasta. The technique is everything.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              20 min
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Serves 2
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">Medium</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="recipe-card" data-cuisine="japanese" data-tags="weekend">
-        <div class="card-thumb card-thumb-japanese">
-          🍜
-          <span class="card-badge">Japanese</span>
-          <div class="card-fav active" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-cuisine">Japanese</div>
-          <div class="card-title">Shoyu ramen</div>
-          <div class="card-desc">A deeply savoury soy-based broth with hand-pulled noodles and a perfect soft egg.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              3 hrs
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Serves 4
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">Advanced</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="recipe-card" data-cuisine="french" data-tags="weekend">
-        <div class="card-thumb card-thumb-french">
-          🥐
-          <span class="card-badge">French</span>
-          <div class="card-fav active" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-cuisine">French</div>
-          <div class="card-title">Croissants</div>
-          <div class="card-desc">Laminated dough, butter on butter, shatteringly crisp. A weekend project worth every fold.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              2 days
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Makes 12
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">Hard</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="recipe-card" data-cuisine="greek" data-tags="vegetarian">
-        <div class="card-thumb card-thumb-greek">
-          🥗
-          <span class="card-badge">Greek</span>
-          <div class="card-fav" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-cuisine">Greek</div>
-          <div class="card-title">Horiatiki salad</div>
-          <div class="card-desc">The real village salad — no lettuce, just tomatoes, cucumber, olives, and a slab of feta.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              10 min
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Serves 4
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">Easy</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="recipe-card" data-cuisine="italian" data-tags="vegetarian weekend">
-        <div class="card-thumb card-thumb-italian">
-          🍕
-          <span class="card-badge">Italian</span>
-          <div class="card-fav active" onclick="toggleFav(event, this)">
-            <svg viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-cuisine">Italian</div>
-          <div class="card-title">Pizza Napoletana</div>
-          <div class="card-desc">72-hour cold-fermented dough, San Marzano tomatoes, fior di latte. No substitutes.</div>
-          <div class="card-meta">
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-              3 days
-            </div>
-            <div class="card-meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-              Makes 4
-            </div>
-            <div class="card-meta-item" style="margin-left:auto;">Medium</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="card-add">
-        <div class="card-add-icon">
-          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v12M3 9h12"/></svg>
-        </div>
-        <p>Add a recipe</p>
-        <small>Paste a URL or write your own</small>
-      </a>
-
+      </div>
     </div>
+
   </main>
 </div>
 
@@ -950,34 +471,388 @@
   <span class="footer-text">Your personal recipe collection · no ads · no fluff</span>
 </footer>
 
-<script>
-  function setFilter(btn, cuisine) {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    const cards = document.querySelectorAll('.recipe-card');
-    let visible = 0;
-    cards.forEach(card => {
-      const match = cuisine === 'all' ||
-        card.dataset.cuisine === cuisine ||
-        (cuisine === 'vegetarian' && card.dataset.tags && card.dataset.tags.includes('vegetarian')) ||
-        (cuisine === 'quick' && ['10 min','20 min'].some(t => card.querySelector('.card-meta')?.textContent.includes(t)));
-      card.style.display = match ? 'block' : 'none';
-      if (match) visible++;
-    });
-    document.getElementById('recipe-count').textContent = visible + ' recipe' + (visible !== 1 ? 's' : '');
-  }
+<!-- ADD RECIPE MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+    </button>
+    <h2 class="modal-title">Add a recipe</h2>
+    <p class="modal-sub">Save a recipe to your collection</p>
 
-  function toggleFav(e, btn) {
-    e.preventDefault();
-    e.stopPropagation();
-    btn.classList.toggle('active');
-    const svg = btn.querySelector('svg');
-    if (btn.classList.contains('active')) {
-      svg.setAttribute('fill', 'currentColor');
-    } else {
-      svg.setAttribute('fill', 'none');
-    }
+    <div class="form-group">
+      <label class="form-label">Recipe name *</label>
+      <input type="text" class="form-input" id="f-name" placeholder="e.g. Spaghetti alla Norma">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Cuisine</label>
+        <select class="form-select" id="f-cuisine">
+          <option value="">Choose…</option>
+          <option value="greek">Greek</option>
+          <option value="italian">Italian</option>
+          <option value="japanese">Japanese</option>
+          <option value="french">French</option>
+          <option value="indian">Indian</option>
+          <option value="mexican">Mexican</option>
+          <option value="spanish">Spanish</option>
+          <option value="thai">Thai</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cook time</label>
+        <input type="text" class="form-input" id="f-time" placeholder="e.g. 30 min">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Serves</label>
+        <input type="text" class="form-input" id="f-serves" placeholder="e.g. 4">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Difficulty</label>
+        <select class="form-select" id="f-difficulty">
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="f-desc" placeholder="A short note about this recipe…"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tags (comma separated)</label>
+      <input type="text" class="form-input" id="f-tags" placeholder="e.g. vegetarian, weekend, quick">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Emoji</label>
+      <input type="text" class="form-input" id="f-emoji" placeholder="🍝" maxlength="4">
+    </div>
+    <p id="f-error" style="color:var(--accent);font-size:0.8rem;display:none;margin-top:-0.5rem;">Please enter a recipe name.</p>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveRecipe()">Save recipe</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const DEFAULT_RECIPES = [
+  { id:'r1', name:'Gemista', cuisine:'greek', tags:'vegetarian weekend', time:90, timeLabel:'90 min', serves:'8', difficulty:'Easy', desc:'Tomatoes & peppers stuffed with herby rice, slow-roasted until caramelised and golden.', emoji:'🍅', href:'gemista.html', addedAt: 1 },
+  { id:'r2', name:'Horiatiki salad', cuisine:'greek', tags:'vegetarian quick', time:10, timeLabel:'10 min', serves:'4', difficulty:'Easy', desc:'The real village salad — no lettuce, just tomatoes, cucumber, olives, and a slab of feta.', emoji:'🥗', href:'recipe.html?id=horiatiki', addedAt: 2 },
+  { id:'r3', name:'Cacio e pepe', cuisine:'italian', tags:'vegetarian quick', time:20, timeLabel:'20 min', serves:'2', difficulty:'Medium', desc:'Three ingredients — pecorino romano, black pepper, pasta. The technique is everything.', emoji:'🍝', href:'recipe.html?id=cacio-e-pepe', addedAt: 3 },
+  { id:'r4', name:'Pizza Napoletana', cuisine:'italian', tags:'vegetarian weekend', time:4320, timeLabel:'3 days', serves:'4 pizzas', difficulty:'Medium', desc:'72-hour cold-fermented dough, San Marzano tomatoes, fior di latte. No substitutes.', emoji:'🍕', href:'recipe.html?id=pizza-napoletana', addedAt: 4 },
+  { id:'r5', name:'Shoyu ramen', cuisine:'japanese', tags:'weekend', time:180, timeLabel:'3 hrs', serves:'4', difficulty:'Advanced', desc:'A deeply savoury soy-based broth with chashu pork belly and a perfect soft marinated egg.', emoji:'🍜', href:'recipe.html?id=shoyu-ramen', addedAt: 5 },
+  { id:'r6', name:'Croissants', cuisine:'french', tags:'weekend', time:2880, timeLabel:'2 days', serves:'12', difficulty:'Hard', desc:'Laminated dough, butter on butter, shatteringly crisp. A weekend project worth every fold.', emoji:'🥐', href:'recipe.html?id=croissants', addedAt: 6 },
+];
+
+const CUISINE_COLOURS = { greek:'#F5DDD4', italian:'#E4EBD0', japanese:'#FFF0E0', french:'#EAE4F5', indian:'#FFF4D8', mexican:'#F5F0DA', spanish:'#FDECD3', thai:'#E8F5E4', other:'#EEE8E0' };
+
+function loadRecipes() {
+  try {
+    const stored = localStorage.getItem('yummy_recipes');
+    return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_RECIPES));
+  } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_RECIPES)); }
+}
+function saveRecipes(arr) {
+  try { localStorage.setItem('yummy_recipes', JSON.stringify(arr)); } catch(e){}
+}
+function loadFavs() {
+  try { return JSON.parse(localStorage.getItem('yummy_favs') || '[]'); } catch(e){ return []; }
+}
+function saveFavs(arr) {
+  try { localStorage.setItem('yummy_favs', JSON.stringify(arr)); } catch(e){}
+}
+
+let recipes = loadRecipes();
+let favs    = loadFavs();
+let activeFilter = 'all';
+let activeView   = 'all';
+let activeSearch = '';
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function cuisineThumb(c) { return CUISINE_COLOURS[c] || '#EEE8E0'; }
+
+function cardHTML(r, inFavGrid) {
+  const isFav  = favs.includes(r.id);
+  const favCls = isFav ? 'card-fav active' : 'card-fav';
+  const svgFill = isFav ? 'currentColor' : 'none';
+  const href   = r.href || `recipe.html?id=${r.id}`;
+  return `
+    <a href="${href}" class="recipe-card" data-id="${r.id}" data-cuisine="${r.cuisine}" data-tags="${r.tags||''}" data-time="${r.time||999}">
+      <div class="card-thumb" style="background:${cuisineThumb(r.cuisine)}">
+        ${r.emoji||'🍽️'}
+        <span class="card-badge">${capitalise(r.cuisine)}</span>
+        <div class="${favCls}" onclick="toggleFav(event,'${r.id}')">
+          <svg viewBox="0 0 16 16" fill="${svgFill}" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-cuisine">${capitalise(r.cuisine)}${r.tags&&r.tags.includes('vegetarian')?' · Vegetarian':''}</div>
+        <div class="card-title">${r.name}</div>
+        <div class="card-desc">${r.desc||''}</div>
+        <div class="card-meta">
+          <div class="card-meta-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
+            ${r.timeLabel||'–'}
+          </div>
+          <div class="card-meta-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
+            Serves ${r.serves||'?'}
+          </div>
+          <div class="card-meta-item" style="margin-left:auto;">${r.difficulty||'Easy'}</div>
+        </div>
+      </div>
+    </a>`;
+}
+
+function addCardHTML() {
+  return `<button class="card-add" onclick="openModal()">
+    <div class="card-add-icon"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v12M3 9h12"/></svg></div>
+    <p>Add a recipe</p>
+    <small>Paste a URL or write your own</small>
+  </button>`;
+}
+
+function emptyHTML(msg, sub) {
+  return `<div class="empty-state">
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" style="display:block;margin:0 auto 1rem"><circle cx="20" cy="20" r="16"/><path d="M20 14v6l4 4"/></svg>
+    <h3>${msg}</h3><p>${sub}</p>
+  </div>`;
+}
+
+function capitalise(s) { return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+
+function getFilteredRecipes() {
+  return recipes.filter(r => {
+    const cuisine = r.cuisine || '';
+    const tags    = r.tags || '';
+    const time    = r.time || 999;
+    const name    = (r.name || '').toLowerCase();
+    const desc    = (r.desc || '').toLowerCase();
+    const search  = activeSearch.toLowerCase();
+
+    const matchFilter =
+      activeFilter === 'all' ||
+      cuisine === activeFilter ||
+      (activeFilter === 'vegetarian' && tags.includes('vegetarian')) ||
+      (activeFilter === 'quick' && time <= 30) ||
+      (activeFilter === 'weekend' && tags.includes('weekend'));
+
+    const matchSearch = !search || name.includes(search) || cuisine.includes(search) || desc.includes(search) || tags.includes(search);
+
+    return matchFilter && matchSearch;
+  });
+}
+
+function renderGrid() {
+  const grid      = document.getElementById('recipe-grid');
+  const countEl   = document.getElementById('recipe-count');
+  const sortVal   = document.getElementById('sort-select').value;
+  let   filtered  = getFilteredRecipes();
+
+  // Sort
+  if (sortVal === 'az')      filtered.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sortVal === 'time')    filtered.sort((a,b) => (a.time||999) - (b.time||999));
+  else if (sortVal === 'cuisine') filtered.sort((a,b) => a.cuisine.localeCompare(b.cuisine));
+  else                             filtered.sort((a,b) => (b.addedAt||0) - (a.addedAt||0));
+
+  if (filtered.length === 0) {
+    grid.innerHTML = emptyHTML('No recipes found', 'Try a different search or filter.');
+  } else {
+    grid.innerHTML = filtered.map(r => cardHTML(r, false)).join('') + addCardHTML();
   }
+  countEl.textContent = filtered.length + ' recipe' + (filtered.length !== 1 ? 's' : '');
+}
+
+function renderFavGrid() {
+  const grid   = document.getElementById('fav-grid');
+  const count  = document.getElementById('fav-count');
+  const favRec = recipes.filter(r => favs.includes(r.id));
+  if (favRec.length === 0) {
+    grid.innerHTML = emptyHTML('No favourites yet', 'Tap the ♥ on any recipe to save it here.');
+  } else {
+    grid.innerHTML = favRec.map(r => cardHTML(r, true)).join('');
+  }
+  count.textContent = favRec.length + ' recipe' + (favRec.length !== 1 ? 's' : '');
+}
+
+function updateStats() {
+  const cuisineSet = new Set(recipes.map(r => r.cuisine));
+  const validTimes = recipes.filter(r => r.time && r.time < 1440).map(r => r.time);
+  const avgMin     = validTimes.length ? Math.round(validTimes.reduce((a,b)=>a+b,0)/validTimes.length) : null;
+  let avgLabel     = '—';
+  if (avgMin) { avgLabel = avgMin >= 60 ? Math.round(avgMin/60)+'<span>h</span>' : avgMin+'<span>m</span>'; }
+
+  document.getElementById('stat-total').textContent    = recipes.length;
+  document.getElementById('stat-cuisines').textContent = cuisineSet.size;
+  document.getElementById('stat-favs').textContent     = favs.length;
+  document.getElementById('stat-time').innerHTML       = avgLabel;
+
+  // Sidebar counts
+  document.getElementById('aside-count-all').textContent  = recipes.length;
+  document.getElementById('aside-count-favs').textContent = favs.length;
+  ['greek','italian','japanese','french'].forEach(c => {
+    const el = document.getElementById('cuisine-count-'+c);
+    if (el) el.textContent = recipes.filter(r=>r.cuisine===c).length;
+  });
+}
+
+function renderAll() { renderGrid(); renderFavGrid(); updateStats(); }
+
+// ── FILTER & SEARCH ───────────────────────────────────────────────────────────
+function setFilter(btn, type) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  activeFilter = type;
+  showView('all', document.getElementById('nav-all'));
+  renderGrid();
+}
+
+function sidebarFilter(tag) {
+  // Activate matching pill or just set filter
+  activeFilter = tag;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  // find matching pill
+  const pill = [...document.querySelectorAll('.filter-pill')].find(p => p.getAttribute('onclick') && p.getAttribute('onclick').includes("'"+tag+"'"));
+  if (pill) pill.classList.add('active');
+  showView('all', document.getElementById('nav-all'));
+  renderGrid();
+}
+
+function handleSearch(input) {
+  activeSearch = input.value;
+  const clearBtn = document.getElementById('search-clear');
+  clearBtn.style.display = activeSearch ? 'flex' : 'none';
+  if (activeView !== 'all') showView('all', document.getElementById('nav-all'));
+  renderGrid();
+}
+
+function clearSearch() {
+  const input = document.getElementById('search-input');
+  input.value = '';
+  activeSearch = '';
+  document.getElementById('search-clear').style.display = 'none';
+  renderGrid();
+}
+
+function sortRecipes(val) {
+  const sel = document.getElementById('sort-select');
+  if (val !== 'recent' && sel) sel.value = val;
+  else if (sel) sel.value = 'recent';
+  showView('all', document.getElementById('nav-all'));
+  renderGrid();
+}
+
+// ── VIEWS ─────────────────────────────────────────────────────────────────────
+function showView(view, navEl) {
+  activeView = view;
+  ['all','favourites','collections','about'].forEach(v => {
+    document.getElementById('view-'+v).style.display = v === view ? '' : 'none';
+  });
+
+  // Nav active state
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+
+  // Sidebar active
+  document.querySelectorAll('.aside-item').forEach(a => a.classList.remove('active'));
+  if (view === 'all')         document.getElementById('aside-all').classList.add('active');
+  if (view === 'favourites')  document.getElementById('aside-favs').classList.add('active');
+
+  if (view === 'favourites') renderFavGrid();
+  if (view === 'all')        renderGrid();
+}
+
+// ── FAVOURITES ────────────────────────────────────────────────────────────────
+function toggleFav(e, id) {
+  e.preventDefault(); e.stopPropagation();
+  if (favs.includes(id)) { favs = favs.filter(f => f !== id); }
+  else { favs.push(id); }
+  saveFavs(favs);
+
+  // Update all fav buttons for this id
+  document.querySelectorAll(`.card-fav`).forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'"+id+"'")) {
+      const isFav = favs.includes(id);
+      btn.classList.toggle('active', isFav);
+      btn.querySelector('svg').setAttribute('fill', isFav ? 'currentColor' : 'none');
+    }
+  });
+
+  updateStats();
+  if (activeView === 'favourites') renderFavGrid();
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('f-name').focus(), 200);
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset form
+  ['f-name','f-time','f-serves','f-desc','f-tags','f-emoji'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('f-cuisine').value = '';
+  document.getElementById('f-difficulty').value = 'Easy';
+  document.getElementById('f-error').style.display = 'none';
+}
+function handleOverlayClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+function saveRecipe() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { document.getElementById('f-error').style.display = 'block'; return; }
+  document.getElementById('f-error').style.display = 'none';
+
+  const timeStr  = document.getElementById('f-time').value.trim();
+  const timeMin  = parseTimeToMin(timeStr);
+  const id       = 'r_' + Date.now();
+  const newRec   = {
+    id, name,
+    cuisine:    document.getElementById('f-cuisine').value || 'other',
+    tags:       document.getElementById('f-tags').value.toLowerCase().replace(/,\s*/g,' '),
+    time:       timeMin,
+    timeLabel:  timeStr || '–',
+    serves:     document.getElementById('f-serves').value.trim() || '?',
+    difficulty: document.getElementById('f-difficulty').value,
+    desc:       document.getElementById('f-desc').value.trim(),
+    emoji:      document.getElementById('f-emoji').value.trim() || '🍽️',
+    href:       `recipe.html?id=${id}`,
+    addedAt:    Date.now(),
+  };
+  recipes.unshift(newRec);
+  saveRecipes(recipes);
+  closeModal();
+  showView('all', document.getElementById('nav-all'));
+  activeFilter = 'all';
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector('.filter-pill').classList.add('active');
+  renderAll();
+}
+
+function parseTimeToMin(str) {
+  if (!str) return 999;
+  str = str.toLowerCase();
+  if (str.includes('day')) { const n=parseFloat(str); return isNaN(n)?999:n*1440; }
+  if (str.includes('hr') || str.includes('hour')) { const n=parseFloat(str); return isNaN(n)?999:n*60; }
+  const n = parseFloat(str);
+  return isNaN(n) ? 999 : n;
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if ((e.key==='k'||e.key==='K') && (e.metaKey||e.ctrlKey)) { e.preventDefault(); document.getElementById('search-input').focus(); }
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderAll();
 </script>
 </body>
 </html>
