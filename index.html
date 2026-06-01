@@ -338,7 +338,11 @@
   <button class="filter-pill" onclick="setFilter(this,'italian')"><span class="filter-dot" style="background:#4A6B2A"></span>Italian</button>
   <button class="filter-pill" onclick="setFilter(this,'japanese')"><span class="filter-dot" style="background:#D4A030"></span>Japanese</button>
   <button class="filter-pill" onclick="setFilter(this,'french')"><span class="filter-dot" style="background:#7A5ABF"></span>French</button>
-  <button class="filter-pill" onclick="setFilter(this,'quick')"><span class="filter-dot" style="background:#2A8A7A"></span>Under 30 min</button>
+  <button class="filter-pill" onclick="setFilter(this,'spanish')"><span class="filter-dot" style="background:#E87040"></span>Spanish</button>
+  <button class="filter-pill" onclick="setFilter(this,'mexican')"><span class="filter-dot" style="background:#2A8A3A"></span>Mexican</button>
+  <button class="filter-pill" onclick="setFilter(this,'thai')"><span class="filter-dot" style="background:#2A8A7A"></span>Thai</button>
+  <button class="filter-pill" onclick="setFilter(this,'indian')"><span class="filter-dot" style="background:#D4601A"></span>Indian</button>
+  <button class="filter-pill" onclick="setFilter(this,'quick')"><span class="filter-dot" style="background:#4A9AAA"></span>Under 30 min</button>
   <button class="filter-pill" onclick="setFilter(this,'vegetarian')"><span class="filter-dot" style="background:#6A9A2A"></span>Vegetarian</button>
 </div>
 
@@ -383,6 +387,22 @@
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
         French <span class="aside-count" id="cuisine-count-french">0</span>
       </button>
+      <button class="aside-item" onclick="sidebarFilter('spanish')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
+        Spanish <span class="aside-count" id="cuisine-count-spanish">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('mexican')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
+        Mexican <span class="aside-count" id="cuisine-count-mexican">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('thai')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
+        Thai <span class="aside-count" id="cuisine-count-thai">0</span>
+      </button>
+      <button class="aside-item" onclick="sidebarFilter('indian')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
+        Indian <span class="aside-count" id="cuisine-count-indian">0</span>
+      </button>
       <button class="aside-item" style="color:var(--ink-light); font-style:italic;" onclick="openModal()">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
         Add cuisine…
@@ -401,7 +421,7 @@
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
         Weekend cook
       </button>
-      <button class="aside-item" onclick="setFilter(document.querySelector('.filter-pill[onclick*=quick]'),'quick')">
+      <button class="aside-item" onclick="sidebarFilter('quick')">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
         Weeknight
       </button>
@@ -452,14 +472,10 @@
     <!-- ABOUT VIEW -->
     <div id="view-about" style="display:none">
       <div style="max-width: 560px; padding: 1rem 0 3rem;">
-        <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:-0.02em;margin-bottom:1.5rem;color:var(--ink);">About </h2>
-        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;"> is your personal recipe collection — a place to save the things you actually cook, without the noise. No ads, no 1,200-word backstory about a summer in Tuscany before you get to the ingredients.</p>
+        <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:-0.02em;margin-bottom:1.5rem;color:var(--ink);">About</h2>
+        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Yummy is your personal recipe collection — a place to save the things you actually cook, without the noise. No ads, no 1,200-word backstory about a summer in Tuscany before you get to the ingredients.</p>
         <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Just the recipes. Organised by cuisine, filtered by time, saved with a heart.</p>
-<p style="color:var(--ink-mid);line-height:1.8;font-size:0.95rem;">Add your own recipes by mailing 
-  <a href="mailto:recipes.yummy2026@gmail.com" style="font-weight:500;color:var(--ink);text-decoration:underline;">
-    recipes.yummy2026@gmail.com
-  </a>
-</p>
+        <p style="color:var(--ink-mid);line-height:1.8;font-size:0.95rem;">Add your own recipes by mailing <a href="mailto:recipes.yummy2026@gmail.com" style="font-weight:500;color:var(--ink);text-decoration:underline;">recipes.yummy2026@gmail.com</a></p>
         <div style="margin-top:2.5rem;padding:1.5rem;background:var(--paper-warm);border-radius:14px;border:1px solid var(--border);">
           <p style="font-size:0.8rem;color:var(--ink-light);line-height:1.7;">Built with care. Hosted on GitHub. Recipes belong to the people who cook them.</p>
         </div>
@@ -474,15 +490,142 @@
   <span class="footer-logo">Yummy</span>
   <span class="footer-text">Your personal recipe collection · no ads · no fluff</span>
 </footer>
+
+<!-- ADD RECIPE MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+    </button>
+    <div class="modal-title">Add a recipe</div>
+    <div class="modal-sub">Save something worth cooking again.</div>
+    <div class="form-group">
+      <label class="form-label">Recipe name *</label>
+      <input type="text" class="form-input" id="f-name" placeholder="e.g. Lemon tart">
+      <div id="f-error" style="display:none;color:var(--accent);font-size:0.75rem;margin-top:0.4rem;">Please enter a recipe name.</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Cuisine</label>
+        <select class="form-select" id="f-cuisine">
+          <option value="">Select…</option>
+          <option value="greek">Greek</option>
+          <option value="italian">Italian</option>
+          <option value="japanese">Japanese</option>
+          <option value="french">French</option>
+          <option value="spanish">Spanish</option>
+          <option value="mexican">Mexican</option>
+          <option value="thai">Thai</option>
+          <option value="indian">Indian</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Emoji</label>
+        <input type="text" class="form-input" id="f-emoji" placeholder="🍽️" maxlength="4">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Cook time</label>
+        <input type="text" class="form-input" id="f-time" placeholder="e.g. 45 min, 2 hrs">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Serves</label>
+        <input type="text" class="form-input" id="f-serves" placeholder="e.g. 4">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Difficulty</label>
+        <select class="form-select" id="f-difficulty">
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tags</label>
+        <input type="text" class="form-input" id="f-tags" placeholder="vegetarian, weekend…">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Short description</label>
+      <textarea class="form-textarea" id="f-desc" placeholder="What makes this recipe worth saving?"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveRecipe()">Save recipe</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const DEFAULT_RECIPES = [
-  { id:'r1', name:'Gemista', cuisine:'greek', tags:'vegetarian weekend', time:90, timeLabel:'90 min', serves:'8', difficulty:'Easy', desc:'Tomatoes & peppers stuffed with herby rice, slow-roasted until caramelised and golden.', emoji:'🍅', href:'recipe.html?id=gemista', addedAt: 1 },
-  { id:'r2', name:'Horiatiki salad', cuisine:'greek', tags:'vegetarian quick', time:10, timeLabel:'10 min', serves:'4', difficulty:'Easy', desc:'The real village salad — no lettuce, just tomatoes, cucumber, olives, and a slab of feta.', emoji:'🥗', href:'recipe.html?id=horiatiki', addedAt: 2 },
-  { id:'r3', name:'Cacio e pepe', cuisine:'italian', tags:'vegetarian quick', time:20, timeLabel:'20 min', serves:'2', difficulty:'Medium', desc:'Three ingredients — pecorino romano, black pepper, pasta. The technique is everything.', emoji:'🍝', href:'recipe.html?id=cacio-e-pepe', addedAt: 3 },
-  { id:'r4', name:'Pizza Napoletana', cuisine:'italian', tags:'vegetarian weekend', time:4320, timeLabel:'3 days', serves:'4 pizzas', difficulty:'Medium', desc:'72-hour cold-fermented dough, San Marzano tomatoes, fior di latte. No substitutes.', emoji:'🍕', href:'recipe.html?id=pizza-napoletana', addedAt: 4 },
-  { id:'r5', name:'Shoyu ramen', cuisine:'japanese', tags:'weekend', time:180, timeLabel:'3 hrs', serves:'4', difficulty:'Advanced', desc:'A deeply savoury soy-based broth with chashu pork belly and a perfect soft marinated egg.', emoji:'🍜', href:'recipe.html?id=shoyu-ramen', addedAt: 5 },
-  { id:'r6', name:'Croissants', cuisine:'french', tags:'weekend', time:2880, timeLabel:'2 days', serves:'12', difficulty:'Hard', desc:'Laminated dough, butter on butter, shatteringly crisp. A weekend project worth every fold.', emoji:'🥐', href:'recipe.html?id=croissants', addedAt: 6 },
+  // GREEK
+  { id:'r1',  name:'Gemista',             cuisine:'greek',    tags:'vegetarian weekend', time:90,   timeLabel:'90 min',         serves:'8',         difficulty:'Easy',    desc:'Tomatoes & peppers stuffed with herby rice, slow-roasted until caramelised and golden.', emoji:'🍅', href:'gemista.html', addedAt:1 },
+  { id:'r2',  name:'Horiatiki salad',     cuisine:'greek',    tags:'vegetarian quick',   time:10,   timeLabel:'10 min',         serves:'4',         difficulty:'Easy',    desc:'The real village salad — no lettuce, just tomatoes, cucumber, olives, and a slab of feta.', emoji:'🥗', href:'recipe.html?id=horiatiki', addedAt:2 },
+  { id:'r3',  name:'Spanakopita',         cuisine:'greek',    tags:'vegetarian weekend', time:75,   timeLabel:'75 min',         serves:'8',         difficulty:'Medium',  desc:'Flaky filo pastry stuffed with spinach, feta, and fresh herbs. Crispy on the outside, creamy within.', emoji:'🥬', href:'recipe.html?id=spanakopita', addedAt:3 },
+  { id:'r4',  name:'Moussaka',            cuisine:'greek',    tags:'weekend',            time:120,  timeLabel:'2 hrs',          serves:'6',         difficulty:'Medium',  desc:'Layered aubergine, spiced lamb mince, and a thick béchamel — Greece\'s answer to lasagne.', emoji:'🍆', href:'recipe.html?id=moussaka', addedAt:4 },
+  { id:'r5',  name:'Avgolemono soup',     cuisine:'greek',    tags:'quick',              time:25,   timeLabel:'25 min',         serves:'4',         difficulty:'Easy',    desc:'Silky chicken broth thickened with egg and lemon — deceptively simple, deeply comforting.', emoji:'🍋', href:'recipe.html?id=avgolemono', addedAt:5 },
+  { id:'r6',  name:'Kleftiko',            cuisine:'greek',    tags:'weekend',            time:240,  timeLabel:'4 hrs',          serves:'4',         difficulty:'Easy',    desc:'Slow-braised lamb sealed in parchment with garlic, lemon, and oregano until fall-off-the-bone tender.', emoji:'🫙', href:'recipe.html?id=kleftiko', addedAt:6 },
+  { id:'r7',  name:'Tzatziki',            cuisine:'greek',    tags:'vegetarian quick',   time:10,   timeLabel:'10 min',         serves:'6',         difficulty:'Easy',    desc:'Thick strained yoghurt, grated cucumber, garlic, dill. Essential. Goes with everything.', emoji:'🥒', href:'recipe.html?id=tzatziki', addedAt:7 },
+  { id:'r8',  name:'Loukoumades',         cuisine:'greek',    tags:'vegetarian weekend', time:45,   timeLabel:'45 min',         serves:'30 pieces', difficulty:'Medium',  desc:'Crispy honey-drenched doughnut balls dusted with cinnamon. Greek street food at its finest.', emoji:'🍯', href:'recipe.html?id=loukoumades', addedAt:8 },
+  // ITALIAN
+  { id:'r9',  name:'Cacio e pepe',        cuisine:'italian',  tags:'vegetarian quick',   time:20,   timeLabel:'20 min',         serves:'2',         difficulty:'Medium',  desc:'Three ingredients — pecorino romano, black pepper, pasta. The technique is everything.', emoji:'🍝', href:'recipe.html?id=cacio-e-pepe', addedAt:9 },
+  { id:'r10', name:'Pizza Napoletana',    cuisine:'italian',  tags:'vegetarian weekend', time:4320, timeLabel:'3 days',         serves:'4 pizzas',  difficulty:'Medium',  desc:'72-hour cold-fermented dough, San Marzano tomatoes, fior di latte. No substitutes.', emoji:'🍕', href:'recipe.html?id=pizza-napoletana', addedAt:10 },
+  { id:'r11', name:'Ribollita',           cuisine:'italian',  tags:'vegetarian weekend', time:90,   timeLabel:'90 min',         serves:'6',         difficulty:'Easy',    desc:'A thick Tuscan bread soup loaded with cavolo nero, cannellini beans, and day-old bread.', emoji:'🫘', href:'recipe.html?id=ribollita', addedAt:11 },
+  { id:'r12', name:'Osso buco',           cuisine:'italian',  tags:'weekend',            time:150,  timeLabel:'2.5 hrs',        serves:'4',         difficulty:'Medium',  desc:'Braised veal shanks in white wine and gremolata — Milan\'s most celebrated dish.', emoji:'🥩', href:'recipe.html?id=osso-buco', addedAt:12 },
+  { id:'r13', name:'Panna cotta',         cuisine:'italian',  tags:'vegetarian weekend', time:20,   timeLabel:'20 min + chill', serves:'4',         difficulty:'Easy',    desc:'Barely-set vanilla cream that wobbles on the plate. Top with macerated strawberries.', emoji:'🍮', href:'recipe.html?id=panna-cotta', addedAt:13 },
+  { id:'r14', name:'Arancini',            cuisine:'italian',  tags:'vegetarian weekend', time:60,   timeLabel:'1 hr',           serves:'12 pieces', difficulty:'Medium',  desc:'Golden fried risotto balls with a molten mozzarella centre. Impossibly good.', emoji:'🧆', href:'recipe.html?id=arancini', addedAt:14 },
+  { id:'r15', name:'Saltimbocca',         cuisine:'italian',  tags:'quick',              time:20,   timeLabel:'20 min',         serves:'4',         difficulty:'Easy',    desc:'Veal cutlets with prosciutto and sage, pan-fried in white wine butter. A Roman classic.', emoji:'🍖', href:'recipe.html?id=saltimbocca', addedAt:15 },
+  // JAPANESE
+  { id:'r16', name:'Shoyu ramen',         cuisine:'japanese', tags:'weekend',            time:180,  timeLabel:'3 hrs',          serves:'4',         difficulty:'Advanced',desc:'A deeply savoury soy-based broth with chashu pork belly and a perfect soft marinated egg.', emoji:'🍜', href:'recipe.html?id=shoyu-ramen', addedAt:16 },
+  { id:'r17', name:'Chicken karaage',     cuisine:'japanese', tags:'quick',              time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Twice-fried chicken thighs in a ginger-soy marinade — juicy inside, shatteringly crisp outside.', emoji:'🍗', href:'recipe.html?id=karaage', addedAt:17 },
+  { id:'r18', name:'Miso soup',           cuisine:'japanese', tags:'vegetarian quick',   time:10,   timeLabel:'10 min',         serves:'4',         difficulty:'Easy',    desc:'Silky dashi broth with white miso, soft tofu, and wakame. The most underrated comfort food.', emoji:'🍵', href:'recipe.html?id=miso-soup', addedAt:18 },
+  { id:'r19', name:'Tamagoyaki',          cuisine:'japanese', tags:'vegetarian quick',   time:15,   timeLabel:'15 min',         serves:'2',         difficulty:'Medium',  desc:'Sweet rolled omelette with layers of dashi-seasoned egg. Beautiful cross-section every time.', emoji:'🥚', href:'recipe.html?id=tamagoyaki', addedAt:19 },
+  { id:'r20', name:'Onigiri',             cuisine:'japanese', tags:'vegetarian quick',   time:20,   timeLabel:'20 min',         serves:'6 pieces',  difficulty:'Easy',    desc:'Rice triangles with umeboshi or tuna mayo, wrapped in nori. Japan\'s perfect portable lunch.', emoji:'🍙', href:'recipe.html?id=onigiri', addedAt:20 },
+  { id:'r21', name:'Katsu curry',         cuisine:'japanese', tags:'weekend',            time:60,   timeLabel:'1 hr',           serves:'4',         difficulty:'Easy',    desc:'Crispy panko-breaded pork over rice with a rich, gently spiced Japanese curry sauce.', emoji:'🍛', href:'recipe.html?id=katsu-curry', addedAt:21 },
+  { id:'r22', name:'Okonomiyaki',         cuisine:'japanese', tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'2',         difficulty:'Easy',    desc:'Savoury cabbage pancake topped with Japanese mayo, okonomiyaki sauce, and bonito flakes.', emoji:'🥞', href:'recipe.html?id=okonomiyaki', addedAt:22 },
+  // FRENCH
+  { id:'r23', name:'Croissants',          cuisine:'french',   tags:'weekend',            time:2880, timeLabel:'2 days',         serves:'12',        difficulty:'Hard',    desc:'Laminated dough, butter on butter, shatteringly crisp. A weekend project worth every fold.', emoji:'🥐', href:'recipe.html?id=croissants', addedAt:23 },
+  { id:'r24', name:"Soupe à l'oignon",   cuisine:'french',   tags:'vegetarian weekend', time:75,   timeLabel:'75 min',         serves:'4',         difficulty:'Easy',    desc:'Deeply caramelised onions in beef broth, topped with a crouton drowning in gruyère.', emoji:'🧅', href:'recipe.html?id=french-onion-soup', addedAt:24 },
+  { id:'r25', name:'Boeuf bourguignon',  cuisine:'french',   tags:'weekend',            time:180,  timeLabel:'3 hrs',          serves:'6',         difficulty:'Medium',  desc:'Beef slowly braised in Burgundy wine with lardons, pearl onions, and mushrooms.', emoji:'🥘', href:'recipe.html?id=boeuf-bourguignon', addedAt:25 },
+  { id:'r26', name:'Crème brûlée',       cuisine:'french',   tags:'vegetarian weekend', time:60,   timeLabel:'1 hr + chill',   serves:'4',         difficulty:'Medium',  desc:'Silky vanilla custard under a perfectly crackling caramel crust. The classic.', emoji:'🍮', href:'recipe.html?id=creme-brulee', addedAt:26 },
+  { id:'r27', name:'Salade Niçoise',     cuisine:'french',   tags:'quick',              time:20,   timeLabel:'20 min',         serves:'2',         difficulty:'Easy',    desc:'Tuna, boiled eggs, olives, green beans, and anchovies on little gem. Riviera sunshine.', emoji:'🥚', href:'recipe.html?id=nicoise', addedAt:27 },
+  { id:'r28', name:'Tarte Tatin',        cuisine:'french',   tags:'vegetarian weekend', time:60,   timeLabel:'1 hr',           serves:'6',         difficulty:'Medium',  desc:'Upside-down caramelised apple tart. Serve warm with crème fraîche and prepare for silence.', emoji:'🍎', href:'recipe.html?id=tarte-tatin', addedAt:28 },
+  { id:'r29', name:'Ratatouille',        cuisine:'french',   tags:'vegetarian weekend', time:90,   timeLabel:'90 min',         serves:'6',         difficulty:'Easy',    desc:'Slow-cooked Provençal vegetable stew with courgette, aubergine, tomato, and herbes de Provence.', emoji:'🫑', href:'recipe.html?id=ratatouille', addedAt:29 },
+  // SPANISH
+  { id:'r30', name:'Patatas bravas',     cuisine:'spanish',  tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Crispy fried potatoes with smoky brava sauce and alioli. Spain\'s greatest bar snack.', emoji:'🥔', href:'recipe.html?id=patatas-bravas', addedAt:30 },
+  { id:'r31', name:'Gambas al ajillo',  cuisine:'spanish',  tags:'quick',              time:15,   timeLabel:'15 min',         serves:'2',         difficulty:'Easy',    desc:'Prawns sizzled in olive oil with garlic, chilli, and sherry. Serve with crusty bread to mop up.', emoji:'🦐', href:'recipe.html?id=gambas-ajillo', addedAt:31 },
+  { id:'r32', name:'Paella Valenciana', cuisine:'spanish',  tags:'weekend',            time:60,   timeLabel:'1 hr',           serves:'6',         difficulty:'Medium',  desc:'Bomba rice with rabbit, chicken, green beans, and saffron, cooked in a wide pan over open flame.', emoji:'🥘', href:'recipe.html?id=paella', addedAt:32 },
+  { id:'r33', name:'Tortilla española', cuisine:'spanish',  tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Thick potato and onion omelette, served at room temperature. Debate: runny or set? (Runny.)', emoji:'🍳', href:'recipe.html?id=tortilla', addedAt:33 },
+  { id:'r34', name:'Gazpacho',          cuisine:'spanish',  tags:'vegetarian quick',   time:15,   timeLabel:'15 min',         serves:'4',         difficulty:'Easy',    desc:'Chilled raw tomato soup blended with cucumber, peppers, garlic, and sherry vinegar.', emoji:'🍅', href:'recipe.html?id=gazpacho', addedAt:34 },
+  { id:'r35', name:'Churros',           cuisine:'spanish',  tags:'vegetarian quick',   time:25,   timeLabel:'25 min',         serves:'4',         difficulty:'Easy',    desc:'Fried dough fingers dusted in cinnamon sugar, dunked in thick hot chocolate. Non-negotiable.', emoji:'🍩', href:'recipe.html?id=churros', addedAt:35 },
+  // MEXICAN
+  { id:'r36', name:'Tacos al pastor',   cuisine:'mexican',  tags:'weekend',            time:90,   timeLabel:'90 min',         serves:'8 tacos',   difficulty:'Medium',  desc:'Achiote-marinated pork with pineapple, onion, and coriander in charred corn tortillas.', emoji:'🌮', href:'recipe.html?id=tacos-al-pastor', addedAt:36 },
+  { id:'r37', name:'Guacamole',         cuisine:'mexican',  tags:'vegetarian quick',   time:10,   timeLabel:'10 min',         serves:'4',         difficulty:'Easy',    desc:'Ripe avocados, lime, coriander, white onion, and serrano. Chunky. Never from a jar.', emoji:'🥑', href:'recipe.html?id=guacamole', addedAt:37 },
+  { id:'r38', name:'Chiles en nogada',  cuisine:'mexican',  tags:'weekend',            time:120,  timeLabel:'2 hrs',          serves:'6',         difficulty:'Hard',    desc:'Poblano chillies stuffed with spiced meat and fruit, topped with walnut cream and pomegranate.', emoji:'🫑', href:'recipe.html?id=chiles-en-nogada', addedAt:38 },
+  { id:'r39', name:'Black bean soup',   cuisine:'mexican',  tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Smoky, hearty black bean soup with cumin, chipotle, and a swirl of crema. Weeknight gold.', emoji:'🫘', href:'recipe.html?id=black-bean-soup', addedAt:39 },
+  { id:'r40', name:'Elote',             cuisine:'mexican',  tags:'vegetarian quick',   time:15,   timeLabel:'15 min',         serves:'4',         difficulty:'Easy',    desc:'Charred corn on the cob slathered in mayo, cotija, chilli powder, and lime. Street corn perfection.', emoji:'🌽', href:'recipe.html?id=elote', addedAt:40 },
+  { id:'r41', name:'Birria tacos',      cuisine:'mexican',  tags:'weekend',            time:240,  timeLabel:'4 hrs',          serves:'8 tacos',   difficulty:'Medium',  desc:'Slow-braised beef in dried chillies and spices, served in crispy consommé-dipped tortillas.', emoji:'🌮', href:'recipe.html?id=birria', addedAt:41 },
+  // THAI
+  { id:'r42', name:'Pad Thai',          cuisine:'thai',     tags:'quick',              time:25,   timeLabel:'25 min',         serves:'2',         difficulty:'Easy',    desc:'Stir-fried rice noodles with shrimp, egg, bean sprouts, tamarind sauce, and crushed peanuts.', emoji:'🍜', href:'recipe.html?id=pad-thai', addedAt:42 },
+  { id:'r43', name:'Green curry',       cuisine:'thai',     tags:'quick',              time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Fragrant coconut milk curry with green chilli paste, Thai aubergines, and kaffir lime leaves.', emoji:'🍲', href:'recipe.html?id=green-curry', addedAt:43 },
+  { id:'r44', name:'Som tum',           cuisine:'thai',     tags:'vegetarian quick',   time:15,   timeLabel:'15 min',         serves:'2',         difficulty:'Easy',    desc:'Shredded green papaya pounded with fish sauce, lime, palm sugar, chilli, and dried shrimp.', emoji:'🥗', href:'recipe.html?id=som-tum', addedAt:44 },
+  { id:'r45', name:'Massaman curry',    cuisine:'thai',     tags:'weekend',            time:120,  timeLabel:'2 hrs',          serves:'4',         difficulty:'Medium',  desc:'Slow-cooked beef curry with potatoes, peanuts, and warming spices. Rich, mild, and magnificent.', emoji:'🥜', href:'recipe.html?id=massaman-curry', addedAt:45 },
+  { id:'r46', name:'Tom kha gai',       cuisine:'thai',     tags:'quick',              time:25,   timeLabel:'25 min',         serves:'4',         difficulty:'Easy',    desc:'Coconut milk soup with chicken, galangal, lemongrass, and mushrooms. Sour, spicy, creamy.', emoji:'🥥', href:'recipe.html?id=tom-kha', addedAt:46 },
+  { id:'r47', name:'Mango sticky rice', cuisine:'thai',     tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'2',         difficulty:'Easy',    desc:'Warm glutinous rice with sweet coconut milk and ripe mango. Thailand\'s finest dessert.', emoji:'🥭', href:'recipe.html?id=mango-sticky-rice', addedAt:47 },
+  // INDIAN
+  { id:'r48', name:'Butter chicken',    cuisine:'indian',   tags:'weekend',            time:90,   timeLabel:'90 min',         serves:'4',         difficulty:'Medium',  desc:'Marinated chicken tikka simmered in a velvety tomato, cream, and spice sauce. Crowd-pleaser.', emoji:'🍛', href:'recipe.html?id=butter-chicken', addedAt:48 },
+  { id:'r49', name:'Dal tadka',         cuisine:'indian',   tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Yellow lentils tempered with cumin, mustard seeds, garlic, and dried chillies. Eat with rice.', emoji:'🫘', href:'recipe.html?id=dal-tadka', addedAt:49 },
+  { id:'r50', name:'Saag paneer',       cuisine:'indian',   tags:'vegetarian quick',   time:35,   timeLabel:'35 min',         serves:'4',         difficulty:'Easy',    desc:'Fresh cheese cubes in a spiced spinach and fenugreek sauce. Earthy and deeply satisfying.', emoji:'🧀', href:'recipe.html?id=saag-paneer', addedAt:50 },
+  { id:'r51', name:'Biryani',           cuisine:'indian',   tags:'weekend',            time:120,  timeLabel:'2 hrs',          serves:'6',         difficulty:'Medium',  desc:'Fragrant basmati rice layered with spiced lamb, fried onions, and saffron. The celebratory dish.', emoji:'🍚', href:'recipe.html?id=biryani', addedAt:51 },
+  { id:'r52', name:'Aloo gobi',         cuisine:'indian',   tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Cauliflower and potatoes dry-cooked with turmeric, cumin, and coriander. Simple perfection.', emoji:'🥦', href:'recipe.html?id=aloo-gobi', addedAt:52 },
+  { id:'r53', name:'Naan',              cuisine:'indian',   tags:'vegetarian weekend', time:90,   timeLabel:'90 min',         serves:'8',         difficulty:'Easy',    desc:'Soft, charred flatbreads leavened with yoghurt, cooked in a screaming-hot cast iron pan.', emoji:'🫓', href:'recipe.html?id=naan', addedAt:53 },
+  { id:'r54', name:'Chana masala',      cuisine:'indian',   tags:'vegetarian quick',   time:30,   timeLabel:'30 min',         serves:'4',         difficulty:'Easy',    desc:'Chickpeas simmered in a tangy tomato-onion masala with amchur and garam masala. One-pot wonder.', emoji:'🫙', href:'recipe.html?id=chana-masala', addedAt:54 },
 ];
 
 const CUISINE_COLOURS = { greek:'#F5DDD4', italian:'#E4EBD0', japanese:'#FFF0E0', french:'#EAE4F5', indian:'#FFF4D8', mexican:'#F5F0DA', spanish:'#FDECD3', thai:'#E8F5E4', other:'#EEE8E0' };
@@ -512,7 +655,7 @@ let activeSearch = '';
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function cuisineThumb(c) { return CUISINE_COLOURS[c] || '#EEE8E0'; }
 
-function cardHTML(r, inFavGrid) {
+function cardHTML(r) {
   const isFav  = favs.includes(r.id);
   const favCls = isFav ? 'card-fav active' : 'card-fav';
   const svgFill = isFav ? 'currentColor' : 'none';
@@ -590,7 +733,6 @@ function renderGrid() {
   const sortVal   = document.getElementById('sort-select').value;
   let   filtered  = getFilteredRecipes();
 
-  // Sort
   if (sortVal === 'az')      filtered.sort((a,b) => a.name.localeCompare(b.name));
   else if (sortVal === 'time')    filtered.sort((a,b) => (a.time||999) - (b.time||999));
   else if (sortVal === 'cuisine') filtered.sort((a,b) => a.cuisine.localeCompare(b.cuisine));
@@ -599,7 +741,7 @@ function renderGrid() {
   if (filtered.length === 0) {
     grid.innerHTML = emptyHTML('No recipes found', 'Try a different search or filter.');
   } else {
-    grid.innerHTML = filtered.map(r => cardHTML(r, false)).join('') + addCardHTML();
+    grid.innerHTML = filtered.map(r => cardHTML(r)).join('') + addCardHTML();
   }
   countEl.textContent = filtered.length + ' recipe' + (filtered.length !== 1 ? 's' : '');
 }
@@ -611,7 +753,7 @@ function renderFavGrid() {
   if (favRec.length === 0) {
     grid.innerHTML = emptyHTML('No favourites yet', 'Tap the ♥ on any recipe to save it here.');
   } else {
-    grid.innerHTML = favRec.map(r => cardHTML(r, true)).join('');
+    grid.innerHTML = favRec.map(r => cardHTML(r)).join('');
   }
   count.textContent = favRec.length + ' recipe' + (favRec.length !== 1 ? 's' : '');
 }
@@ -628,10 +770,9 @@ function updateStats() {
   document.getElementById('stat-favs').textContent     = favs.length;
   document.getElementById('stat-time').innerHTML       = avgLabel;
 
-  // Sidebar counts
   document.getElementById('aside-count-all').textContent  = recipes.length;
   document.getElementById('aside-count-favs').textContent = favs.length;
-  ['greek','italian','japanese','french'].forEach(c => {
+  ['greek','italian','japanese','french','spanish','mexican','thai','indian'].forEach(c => {
     const el = document.getElementById('cuisine-count-'+c);
     if (el) el.textContent = recipes.filter(r=>r.cuisine===c).length;
   });
@@ -649,10 +790,8 @@ function setFilter(btn, type) {
 }
 
 function sidebarFilter(tag) {
-  // Activate matching pill or just set filter
   activeFilter = tag;
   document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  // find matching pill
   const pill = [...document.querySelectorAll('.filter-pill')].find(p => p.getAttribute('onclick') && p.getAttribute('onclick').includes("'"+tag+"'"));
   if (pill) pill.classList.add('active');
   showView('all', document.getElementById('nav-all'));
@@ -689,16 +828,11 @@ function showView(view, navEl) {
   ['all','favourites','collections','about'].forEach(v => {
     document.getElementById('view-'+v).style.display = v === view ? '' : 'none';
   });
-
-  // Nav active state
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   if (navEl) navEl.classList.add('active');
-
-  // Sidebar active
   document.querySelectorAll('.aside-item').forEach(a => a.classList.remove('active'));
   if (view === 'all')         document.getElementById('aside-all').classList.add('active');
   if (view === 'favourites')  document.getElementById('aside-favs').classList.add('active');
-
   if (view === 'favourites') renderFavGrid();
   if (view === 'all')        renderGrid();
 }
@@ -709,8 +843,6 @@ function toggleFav(e, id) {
   if (favs.includes(id)) { favs = favs.filter(f => f !== id); }
   else { favs.push(id); }
   saveFavs(favs);
-
-  // Update all fav buttons for this id
   document.querySelectorAll(`.card-fav`).forEach(btn => {
     if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'"+id+"'")) {
       const isFav = favs.includes(id);
@@ -718,7 +850,6 @@ function toggleFav(e, id) {
       btn.querySelector('svg').setAttribute('fill', isFav ? 'currentColor' : 'none');
     }
   });
-
   updateStats();
   if (activeView === 'favourites') renderFavGrid();
 }
@@ -732,7 +863,6 @@ function openModal() {
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
-  // Reset form
   ['f-name','f-time','f-serves','f-desc','f-tags','f-emoji'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
   document.getElementById('f-cuisine').value = '';
   document.getElementById('f-difficulty').value = 'Easy';
@@ -744,7 +874,6 @@ function saveRecipe() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { document.getElementById('f-error').style.display = 'block'; return; }
   document.getElementById('f-error').style.display = 'none';
-
   const timeStr  = document.getElementById('f-time').value.trim();
   const timeMin  = parseTimeToMin(timeStr);
   const id       = 'r_' + Date.now();
