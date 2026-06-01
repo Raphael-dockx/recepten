@@ -3,856 +3,534 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yummy — a recipe collection</title>
+<title>Recipe — Yummy</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --ink: #1A1610;
-    --ink-mid: #4A3F30;
-    --ink-light: #9A8E7E;
-    --paper: #FAF7F2;
-    --paper-warm: #F3EDE3;
-    --paper-mid: #E8DFD0;
-    --accent: #C0522A;
-    --accent-light: #E8795A;
-    --accent-pale: #F5DDD4;
-    --green: #4A6B2A;
-    --green-pale: #E4EBD0;
-    --border: rgba(90,70,40,0.12);
-    --border-mid: rgba(90,70,40,0.22);
+    --ink: #1A1610; --ink-mid: #4A3F30; --ink-light: #9A8E7E;
+    --paper: #FAF7F2; --paper-warm: #F3EDE3; --paper-mid: #E8DFD0;
+    --accent: #C0522A; --accent-light: #E8795A; --accent-pale: #F5DDD4;
+    --border: rgba(90,70,40,0.12); --border-mid: rgba(90,70,40,0.22);
   }
-
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.6; min-height: 100vh; }
 
-  /* ── HEADER ── */
   header {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--paper); border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 3rem; height: 64px;
+    position: sticky; top: 0; z-index: 100; background: var(--paper);
+    border-bottom: 1px solid var(--border); display: flex; align-items: center;
+    justify-content: space-between; padding: 0 3rem; height: 64px;
   }
-  .logo {
-    font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; font-weight: 600;
-    color: var(--ink); text-decoration: none; display: flex; align-items: center;
-    gap: 10px; letter-spacing: -0.02em;
-  }
+  .logo { font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; letter-spacing: -0.02em; }
   .logo-pip { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  nav { display: flex; align-items: center; gap: 0.25rem; height: 100%; }
-  nav a {
-    display: flex; align-items: center; height: 100%; padding: 0 1rem;
-    font-size: 0.85rem; font-weight: 400; color: var(--ink-light); text-decoration: none;
-    border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; letter-spacing: 0.01em;
-    cursor: pointer;
+  .back-btn { display: flex; align-items: center; gap: 0.5rem; color: var(--ink-light); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; padding: 0.5rem; border-radius: 8px; }
+  .back-btn:hover { color: var(--ink); background: var(--paper-warm); }
+  .back-btn svg { width: 16px; height: 16px; }
+  .header-right { display: flex; align-items: center; gap: 0.75rem; }
+  .btn-fav {
+    display: flex; align-items: center; gap: 0.4rem; background: var(--paper-warm);
+    border: 1px solid var(--border-mid); border-radius: 99px; padding: 0.45rem 1rem;
+    font-size: 0.8rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    color: var(--ink-mid); cursor: pointer; transition: all 0.15s;
   }
-  nav a:hover { color: var(--ink); }
-  nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
-  .header-actions { display: flex; align-items: center; gap: 0.5rem; }
-  .search-wrap { position: relative; }
-  .search-bar {
-    display: flex; align-items: center; gap: 0.5rem;
-    background: var(--paper-warm); border: 1px solid var(--border-mid);
-    border-radius: 99px; padding: 0.4rem 1rem; font-size: 0.8rem;
-    color: var(--ink-light); cursor: text; transition: border-color 0.15s, background 0.15s;
-    min-width: 180px;
-  }
-  .search-bar:hover { border-color: var(--accent-light); background: #fff; }
-  .search-bar svg { width: 14px; height: 14px; opacity: 0.5; flex-shrink: 0; }
-  .search-input {
-    background: none; border: none; outline: none; font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem; color: var(--ink); width: 100%; min-width: 120px;
-  }
-  .search-input::placeholder { color: var(--ink-light); }
-  .search-clear {
-    background: none; border: none; cursor: pointer; padding: 0; color: var(--ink-light);
-    display: none; align-items: center; line-height: 1;
-  }
-  .search-clear svg { width: 12px; height: 12px; }
-  .btn-add {
-    display: flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff;
-    border: none; border-radius: 99px; padding: 0.45rem 1rem; font-size: 0.8rem; font-weight: 500;
-    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.15s; letter-spacing: 0.01em;
-  }
-  .btn-add:hover { background: #A8421C; }
-  .btn-add svg { width: 13px; height: 13px; }
+  .btn-fav:hover { border-color: var(--accent-light); color: var(--accent); }
+  .btn-fav.active { background: var(--accent-pale); border-color: var(--accent); color: var(--accent); }
+  .btn-fav svg { width: 13px; height: 13px; }
+  .btn-fav.active svg { fill: var(--accent); }
 
-  /* ── HERO BAND ── */
-  .hero {
-    background: var(--ink); padding: 5rem 3rem 4rem;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  /* ── RECIPE HERO ── */
+  .recipe-hero {
+    background: var(--ink); padding: 4rem 3rem 3rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end;
     position: relative; overflow: hidden;
   }
-  .hero::before { content: ''; position: absolute; right: -80px; top: -80px; width: 400px; height: 400px; border-radius: 50%; border: 1px solid rgba(192,82,42,0.18); }
-  .hero::after  { content: ''; position: absolute; right: -30px; top: -30px; width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(192,82,42,0.1); }
-  .hero-text { position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); font-weight: 500; margin-bottom: 1.25rem; }
-  .hero-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 300; line-height: 1.05; color: var(--paper); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .hero-title em { font-style: italic; color: var(--accent-light); }
-  .hero-desc { font-size: 0.95rem; color: rgba(250,247,242,0.55); max-width: 380px; line-height: 1.7; font-weight: 300; }
-  .hero-stats {
-    position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07);
-  }
-  .stat-cell { background: rgba(26,22,16,0.8); padding: 2rem 1.75rem; transition: background 0.2s; }
-  .stat-cell:hover { background: rgba(40,33,24,0.9); }
-  .stat-num { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 300; color: var(--paper); line-height: 1; margin-bottom: 0.4rem; }
-  .stat-num span { font-size: 1.2rem; color: var(--accent-light); }
-  .stat-label { font-size: 0.75rem; color: rgba(250,247,242,0.4); letter-spacing: 0.05em; font-weight: 300; }
+  .recipe-hero::before { content:''; position:absolute; right:-60px; top:-60px; width:320px; height:320px; border-radius:50%; border:1px solid rgba(192,82,42,0.15); }
+  .recipe-eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); font-weight: 500; margin-bottom: 1rem; }
+  .recipe-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.05; color: var(--paper); letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+  .recipe-desc { font-size: 0.95rem; color: rgba(250,247,242,0.6); max-width: 500px; line-height: 1.7; font-weight: 300; }
+  .recipe-emoji { font-size: 6rem; line-height: 1; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3)); position: relative; z-index: 2; }
 
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    padding: 1.25rem 3rem; background: var(--paper-warm); border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;
+  /* ── META STRIP ── */
+  .meta-strip {
+    display: flex; align-items: stretch; border-bottom: 1px solid var(--border);
+    background: var(--paper-warm); overflow-x: auto;
   }
-  .filter-label { font-size: 0.75rem; color: var(--ink-light); font-weight: 500; letter-spacing: 0.05em; white-space: nowrap; margin-right: 0.5rem; }
-  .filter-pill {
-    display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.85rem;
-    border-radius: 99px; border: 1px solid var(--border-mid); background: transparent;
-    font-size: 0.8rem; color: var(--ink-mid); font-family: 'DM Sans', sans-serif;
-    cursor: pointer; white-space: nowrap; transition: all 0.15s;
-  }
-  .filter-pill:hover { background: var(--paper); border-color: var(--accent-light); color: var(--accent); }
-  .filter-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .filter-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-
-  /* ── MAIN LAYOUT ── */
-  .page-body { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 64px - 80px - 60px); }
-
-  /* ── SIDEBAR ── */
-  aside {
-    border-right: 1px solid var(--border); padding: 2rem 0; background: var(--paper);
-    position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
-  }
-  .aside-section { margin-bottom: 2rem; }
-  .aside-heading { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); padding: 0 1.5rem; margin-bottom: 0.5rem; }
-  .aside-item {
-    display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.5rem;
-    font-size: 0.85rem; color: var(--ink-mid); cursor: pointer; text-decoration: none;
-    transition: background 0.1s, color 0.1s; border-right: 2px solid transparent;
-    background: none; border-left: none; border-top: none; border-bottom: none;
-    width: 100%; text-align: left; font-family: 'DM Sans', sans-serif;
-  }
-  .aside-item:hover { background: var(--paper-warm); color: var(--ink); }
-  .aside-item.active { color: var(--ink); font-weight: 500; background: var(--paper-warm); border-right-color: var(--accent); }
-  .aside-item svg { width: 15px; height: 15px; opacity: 0.6; flex-shrink: 0; }
-  .aside-item.active svg { opacity: 1; }
-  .aside-count { margin-left: auto; font-size: 0.7rem; background: var(--paper-mid); border-radius: 10px; padding: 1px 7px; color: var(--ink-light); font-weight: 400; }
-  .aside-divider { height: 1px; background: var(--border); margin: 0.75rem 1.5rem 1.25rem; }
-
-  /* ── RECIPE GRID ── */
-  main { padding: 2.5rem 3rem; }
-  .grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
-  .grid-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: -0.01em; color: var(--ink); }
-  .grid-title span { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 400; color: var(--ink-light); margin-left: 0.75rem; vertical-align: middle; }
-  .sort-select { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--ink-mid); }
-  .sort-select select {
-    background: var(--paper-warm); border: 1px solid var(--border-mid); border-radius: 6px;
-    padding: 0.35rem 0.6rem; font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
-    color: var(--ink); outline: none; cursor: pointer;
-  }
-  .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
-
-  /* ── RECIPE CARD ── */
-  .recipe-card {
-    background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
-    cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    animation: fadeUp 0.4s ease both; text-decoration: none; color: inherit; display: block;
-  }
-  .recipe-card:hover { border-color: var(--border-mid); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,22,16,0.08); }
-  .recipe-card.hidden { display: none; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-  .card-thumb {
-    height: 160px; display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem; position: relative; overflow: hidden;
-  }
-  .card-thumb-greek    { background: #F5DDD4; }
-  .card-thumb-italian  { background: #E4EBD0; }
-  .card-thumb-japanese { background: #FFF0E0; }
-  .card-thumb-french   { background: #EAE4F5; }
-  .card-thumb-indian   { background: #FFF4D8; }
-  .card-thumb-mexican  { background: #F5F0DA; }
-  .card-thumb-spanish  { background: #FDECD3; }
-  .card-thumb-thai     { background: #E8F5E4; }
-
-  .card-badge {
-    position: absolute; top: 10px; left: 10px; font-size: 0.65rem; font-weight: 500;
-    letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px;
-    background: rgba(26,22,16,0.65); color: rgba(250,247,242,0.9);
-  }
-  .card-fav {
-    position: absolute; top: 10px; right: 10px; width: 28px; height: 28px;
-    border-radius: 50%; background: rgba(255,255,255,0.85);
-    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s;
-  }
-  .card-fav:hover { background: #fff; }
-  .card-fav svg { width: 14px; height: 14px; color: var(--ink-light); transition: color 0.15s; }
-  .card-fav.active svg { color: var(--accent); fill: var(--accent); }
-
-  .card-body { padding: 1rem 1.1rem 1.2rem; }
-  .card-cuisine { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
-  .card-title { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.25; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
-  .card-desc { font-size: 0.8rem; color: var(--ink-light); line-height: 1.5; margin-bottom: 0.9rem; font-weight: 300; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .card-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; color: var(--ink-light); border-top: 1px solid var(--border); padding-top: 0.8rem; }
-  .card-meta-item { display: flex; align-items: center; gap: 0.3rem; }
-  .card-meta-item svg { width: 12px; height: 12px; }
-
-  /* ── ADD CARD ── */
-  .card-add {
-    border: 1.5px dashed var(--border-mid); border-radius: 16px;
+  .meta-item {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.75rem; cursor: pointer; padding: 2rem; color: var(--ink-light); min-height: 280px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none;
-    animation: fadeUp 0.4s ease 0.35s both; background: none; width: 100%;
-    font-family: 'DM Sans', sans-serif;
+    padding: 1.25rem 2rem; gap: 0.2rem; border-right: 1px solid var(--border); flex: 1; min-width: 100px;
   }
-  .card-add:hover { background: var(--paper-warm); border-color: var(--accent-light); color: var(--accent); }
-  .card-add-icon { width: 40px; height: 40px; border-radius: 50%; border: 1.5px dashed currentColor; display: flex; align-items: center; justify-content: center; }
-  .card-add-icon svg { width: 18px; height: 18px; }
-  .card-add p { font-size: 0.85rem; font-weight: 500; }
-  .card-add small { font-size: 0.75rem; opacity: 0.7; }
+  .meta-item:last-child { border-right: none; }
+  .meta-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); }
+  .meta-value { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; }
 
-  /* ── EMPTY STATE ── */
-  .empty-state { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--ink-light); }
-  .empty-state svg { width: 40px; height: 40px; margin-bottom: 1rem; opacity: 0.3; }
-  .empty-state h3 { font-family: 'Fraunces', serif; font-weight: 300; font-size: 1.25rem; color: var(--ink-mid); margin-bottom: 0.5rem; }
-  .empty-state p { font-size: 0.85rem; }
+  /* ── BODY ── */
+  .recipe-body { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; padding: 3rem; }
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(26,22,16,0.55); z-index: 500;
-    display: flex; align-items: center; justify-content: center; padding: 2rem;
-    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  /* ── INGREDIENTS ── */
+  .ingredients-panel { position: sticky; top: calc(64px + 2rem); height: fit-content; }
+  .panel-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+  .panel-sub { font-size: 0.8rem; color: var(--ink-light); margin-bottom: 1.5rem; }
+  .ingredient-list { list-style: none; }
+  .ingredient-item {
+    display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border); font-size: 0.875rem; cursor: pointer;
+    transition: color 0.15s; user-select: none;
   }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--paper); border-radius: 20px; width: 100%; max-width: 520px;
-    padding: 2.5rem; position: relative; transform: translateY(16px);
-    transition: transform 0.2s; box-shadow: 0 24px 64px rgba(26,22,16,0.2);
+  .ingredient-item:last-child { border-bottom: none; }
+  .ingredient-item.checked { color: var(--ink-light); text-decoration: line-through; }
+  .ingredient-check {
+    width: 18px; height: 18px; border: 1.5px solid var(--border-mid); border-radius: 5px;
+    flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s; background: #fff;
   }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 1.25rem; right: 1.25rem; background: var(--paper-warm);
-    border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; color: var(--ink-light);
-    transition: background 0.15s, color 0.15s;
-  }
-  .modal-close:hover { background: var(--paper-mid); color: var(--ink); }
-  .modal-close svg { width: 14px; height: 14px; }
-  .modal-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 0.35rem; }
-  .modal-sub { font-size: 0.85rem; color: var(--ink-light); margin-bottom: 2rem; font-weight: 300; }
-  .form-group { margin-bottom: 1.25rem; }
-  .form-label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.5rem; }
-  .form-input, .form-select, .form-textarea {
-    width: 100%; background: var(--paper-warm); border: 1px solid var(--border-mid);
-    border-radius: 10px; padding: 0.65rem 1rem; font-size: 0.875rem; font-family: 'DM Sans', sans-serif;
-    color: var(--ink); outline: none; transition: border-color 0.15s, background 0.15s;
-  }
-  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent-light); background: #fff; }
-  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-actions { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
-  .btn-cancel {
-    flex: 1; background: var(--paper-warm); border: 1px solid var(--border-mid); border-radius: 99px;
-    padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
-    color: var(--ink-mid); cursor: pointer; transition: background 0.15s;
-  }
-  .btn-cancel:hover { background: var(--paper-mid); }
-  .btn-save {
-    flex: 2; background: var(--accent); border: none; border-radius: 99px;
-    padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
-    color: #fff; cursor: pointer; transition: background 0.15s;
-  }
-  .btn-save:hover { background: #A8421C; }
+  .ingredient-item.checked .ingredient-check { background: var(--accent); border-color: var(--accent); }
+  .ingredient-check svg { width: 10px; height: 10px; color: #fff; display: none; }
+  .ingredient-item.checked .ingredient-check svg { display: block; }
+  .ingredient-amount { font-weight: 500; color: var(--accent); min-width: 60px; }
+  .ingredient-name { flex: 1; }
 
-  /* ── VIEW PANELS ── */
-  .view-panel { display: none; }
-  .view-panel.active { display: contents; }
+  /* ── SERVES ADJUSTER ── */
+  .serves-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .serves-label { font-size: 0.75rem; font-weight: 500; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.1em; }
+  .serves-ctrl { display: flex; align-items: center; gap: 0.5rem; background: var(--paper-warm); border: 1px solid var(--border-mid); border-radius: 99px; padding: 0.3rem 0.75rem; }
+  .serves-btn { background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--ink-mid); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.15s; padding: 0; }
+  .serves-btn:hover { background: var(--paper-mid); }
+  .serves-num { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 400; min-width: 20px; text-align: center; }
 
-  /* ── FOOTER ── */
-  footer { background: var(--ink); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+  /* ── INSTRUCTIONS ── */
+  .instructions-panel {}
+  .step { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .step-num { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 300; color: var(--accent-light); line-height: 1.2; flex-shrink: 0; width: 2rem; text-align: right; }
+  .step-content {}
+  .step-title { font-weight: 500; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: 0.01em; }
+  .step-body { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; }
+
+  /* ── NOTES ── */
+  .notes-block { background: var(--paper-warm); border-left: 3px solid var(--accent-light); border-radius: 0 10px 10px 0; padding: 1.25rem 1.5rem; margin-top: 2.5rem; font-size: 0.875rem; color: var(--ink-mid); line-height: 1.7; }
+  .notes-block strong { display: block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.5rem; }
+
+  footer { background: var(--ink); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; margin-top: 4rem; }
   .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; font-style: italic; color: var(--accent-light); }
   .footer-text { font-size: 0.8rem; color: rgba(250,247,242,0.3); font-weight: 300; }
 
   @media (max-width: 900px) {
     header { padding: 0 1.5rem; }
-    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-    .hero-stats { display: none; }
-    .page-body { grid-template-columns: 1fr; }
-    aside { display: none; }
-    main { padding: 1.5rem; }
-    .filter-bar { padding: 1rem 1.5rem; }
+    .recipe-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .recipe-emoji { display: none; }
+    .recipe-body { grid-template-columns: 1fr; gap: 2.5rem; padding: 1.5rem; }
+    .ingredients-panel { position: static; }
+    .meta-item { padding: 1rem; }
     footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
-    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <a href="index.html" class="logo"><div class="logo-pip"></div>Yummy</a>
-  <nav>
-    <a href="#" class="active" id="nav-all" onclick="showView('all',this)">All recipes</a>
-    <a href="#" id="nav-collections" onclick="showView('collections',this)">Collections</a>
-    <a href="#" id="nav-favourites" onclick="showView('favourites',this)">Favourites</a>
-    <a href="#" id="nav-about" onclick="showView('about',this)">About</a>
-  </nav>
-  <div class="header-actions">
-    <div class="search-bar">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M11 11l3 3"/></svg>
-      <input type="text" class="search-input" id="search-input" placeholder="Search recipes…" oninput="handleSearch(this)">
-      <button class="search-clear" id="search-clear" onclick="clearSearch()">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
-      </button>
-    </div>
-    <button class="btn-add" onclick="openModal()">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10"/></svg>
-      Add recipe
+  <div class="header-right">
+    <a href="index.html" class="back-btn">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+      All recipes
+    </a>
+    <button class="btn-fav" id="fav-btn" onclick="toggleFav()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
+      Save
     </button>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Your personal cookbook</p>
-    <h1 class="hero-title">Everything that<br><em>tastes good.</em></h1>
-    <p class="hero-desc">A growing collection of recipes worth making again. No ads, no life stories — just the food.</p>
+<section class="recipe-hero" id="recipe-hero">
+  <div>
+    <p class="recipe-eyebrow" id="r-cuisine">Greek · Vegetarian</p>
+    <h1 class="recipe-title" id="r-title">Gemista</h1>
+    <p class="recipe-desc" id="r-desc">Tomatoes and peppers stuffed with herby, fragrant rice and slow-roasted until caramelised and collapsing at the edges. The olive oil pooling in the base of the dish is the best bit.</p>
   </div>
-  <div class="hero-stats">
-    <div class="stat-cell"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Recipes saved</div></div>
-    <div class="stat-cell"><div class="stat-num" id="stat-cuisines">0</div><div class="stat-label">Cuisines</div></div>
-    <div class="stat-cell"><div class="stat-num" id="stat-favs">0</div><div class="stat-label">Favourites</div></div>
-    <div class="stat-cell"><div class="stat-num" id="stat-time">—</div><div class="stat-label">Avg cook time</div></div>
-  </div>
+  <div class="recipe-emoji" id="r-emoji">🍅</div>
 </section>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <span class="filter-label">Filter:</span>
-  <button class="filter-pill active" onclick="setFilter(this,'all')">All</button>
-  <button class="filter-pill" onclick="setFilter(this,'greek')"><span class="filter-dot" style="background:#C0522A"></span>Greek</button>
-  <button class="filter-pill" onclick="setFilter(this,'italian')"><span class="filter-dot" style="background:#4A6B2A"></span>Italian</button>
-  <button class="filter-pill" onclick="setFilter(this,'japanese')"><span class="filter-dot" style="background:#D4A030"></span>Japanese</button>
-  <button class="filter-pill" onclick="setFilter(this,'french')"><span class="filter-dot" style="background:#7A5ABF"></span>French</button>
-  <button class="filter-pill" onclick="setFilter(this,'quick')"><span class="filter-dot" style="background:#2A8A7A"></span>Under 30 min</button>
-  <button class="filter-pill" onclick="setFilter(this,'vegetarian')"><span class="filter-dot" style="background:#6A9A2A"></span>Vegetarian</button>
+<!-- META STRIP -->
+<div class="meta-strip" id="meta-strip">
+  <div class="meta-item"><span class="meta-label">Prep</span><span class="meta-value" id="m-prep">30 min</span></div>
+  <div class="meta-item"><span class="meta-label">Cook</span><span class="meta-value" id="m-cook">60 min</span></div>
+  <div class="meta-item"><span class="meta-label">Total</span><span class="meta-value" id="m-total">90 min</span></div>
+  <div class="meta-item"><span class="meta-label">Serves</span><span class="meta-value" id="m-serves">8</span></div>
+  <div class="meta-item"><span class="meta-label">Difficulty</span><span class="meta-value" id="m-difficulty">Easy</span></div>
 </div>
 
-<!-- PAGE BODY -->
-<div class="page-body">
+<!-- RECIPE BODY -->
+<div class="recipe-body">
 
-  <!-- SIDEBAR -->
-  <aside>
-    <div class="aside-section">
-      <div class="aside-heading">Browse</div>
-      <button class="aside-item active" id="aside-all" onclick="showView('all', document.getElementById('nav-all'))">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
-        All recipes <span class="aside-count" id="aside-count-all">0</span>
-      </button>
-      <button class="aside-item" id="aside-favs" onclick="showView('favourites', document.getElementById('nav-favourites'))">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2.5L9.8 6.2l4.2.6-3 2.9.7 4.1L8 11.7l-3.7 2.1.7-4.1-3-2.9 4.2-.6z"/></svg>
-        Favourites <span class="aside-count" id="aside-count-favs">0</span>
-      </button>
-      <button class="aside-item" id="aside-recent" onclick="sortRecipes('recent')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-        Recently added
-      </button>
+  <!-- INGREDIENTS -->
+  <aside class="ingredients-panel">
+    <h2 class="panel-title">Ingredients</h2>
+    <div class="serves-row">
+      <span class="serves-label">Serves</span>
+      <div class="serves-ctrl">
+        <button class="serves-btn" onclick="adjustServes(-1)">−</button>
+        <span class="serves-num" id="serves-display">8</span>
+        <button class="serves-btn" onclick="adjustServes(1)">+</button>
+      </div>
     </div>
-
-    <div class="aside-divider"></div>
-
-    <div class="aside-section">
-      <div class="aside-heading">Cuisine</div>
-      <button class="aside-item" onclick="sidebarFilter('greek')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Greek <span class="aside-count" id="cuisine-count-greek">0</span>
-      </button>
-      <button class="aside-item" onclick="sidebarFilter('italian')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Italian <span class="aside-count" id="cuisine-count-italian">0</span>
-      </button>
-      <button class="aside-item" onclick="sidebarFilter('japanese')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        Japanese <span class="aside-count" id="cuisine-count-japanese">0</span>
-      </button>
-      <button class="aside-item" onclick="sidebarFilter('french')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
-        French <span class="aside-count" id="cuisine-count-french">0</span>
-      </button>
-      <button class="aside-item" style="color:var(--ink-light); font-style:italic;" onclick="openModal()">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
-        Add cuisine…
-      </button>
-    </div>
-
-    <div class="aside-divider"></div>
-
-    <div class="aside-section">
-      <div class="aside-heading">Tags</div>
-      <button class="aside-item" onclick="sidebarFilter('vegetarian')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
-        Vegetarian
-      </button>
-      <button class="aside-item" onclick="sidebarFilter('weekend')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
-        Weekend cook
-      </button>
-      <button class="aside-item" onclick="setFilter(document.querySelector('.filter-pill[onclick*=quick]'),'quick')">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h5l5.5 5.5a2 2 0 010 2.8L11 13.8a2 2 0 01-2.8 0L3 8V3z"/><circle cx="5.5" cy="5.5" r="1"/></svg>
-        Weeknight
-      </button>
-    </div>
+    <p class="panel-sub">Tap an ingredient to check it off.</p>
+    <ul class="ingredient-list" id="ingredient-list"></ul>
   </aside>
 
-  <!-- MAIN -->
-  <main id="main-content">
-
-    <!-- ALL RECIPES VIEW -->
-    <div id="view-all">
-      <div class="grid-header">
-        <div class="grid-title">All recipes <span id="recipe-count">0 recipes</span></div>
-        <div class="sort-select">
-          <span style="color:var(--ink-light)">Sort:</span>
-          <select id="sort-select" onchange="sortRecipes(this.value)">
-            <option value="recent">Recently added</option>
-            <option value="az">A – Z</option>
-            <option value="time">Cook time</option>
-            <option value="cuisine">Cuisine</option>
-          </select>
-        </div>
-      </div>
-      <div class="recipe-grid" id="recipe-grid"></div>
+  <!-- METHOD -->
+  <div class="instructions-panel">
+    <h2 class="panel-title" style="margin-bottom:2rem">Method</h2>
+    <div id="steps-list"></div>
+    <div class="notes-block" id="notes-block" style="display:none">
+      <strong>Cook's notes</strong>
+      <span id="notes-text"></span>
     </div>
+  </div>
 
-    <!-- FAVOURITES VIEW -->
-    <div id="view-favourites" style="display:none">
-      <div class="grid-header">
-        <div class="grid-title">Favourites <span id="fav-count">0 recipes</span></div>
-      </div>
-      <div class="recipe-grid" id="fav-grid"></div>
-    </div>
-
-    <!-- COLLECTIONS VIEW -->
-    <div id="view-collections" style="display:none">
-      <div class="grid-header">
-        <div class="grid-title">Collections</div>
-      </div>
-      <div style="padding: 3rem 0; text-align: center; color: var(--ink-light);">
-        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" style="width:48px;height:48px;margin-bottom:1rem;opacity:0.3;display:block;margin-left:auto;margin-right:auto"><rect x="4" y="8" width="14" height="18" rx="2"/><rect x="22" y="8" width="14" height="18" rx="2"/><rect x="4" y="30" width="14" height="6" rx="2"/><rect x="22" y="30" width="14" height="6" rx="2"/></svg>
-        <p style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:var(--ink-mid);margin-bottom:0.5rem;">No collections yet</p>
-        <p style="font-size:0.85rem;">Group your recipes into themed collections — weeknight dinners, dinner party showstoppers, summer salads…</p>
-        <button onclick="openModal()" style="margin-top:1.5rem;background:var(--accent);color:#fff;border:none;border-radius:99px;padding:0.6rem 1.4rem;font-size:0.85rem;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;">Add your first recipe</button>
-      </div>
-    </div>
-
-    <!-- ABOUT VIEW -->
-    <div id="view-about" style="display:none">
-      <div style="max-width: 560px; padding: 1rem 0 3rem;">
-        <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:-0.02em;margin-bottom:1.5rem;color:var(--ink);">About Yummy</h2>
-        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Yummy is your personal recipe collection — a place to save the things you actually cook, without the noise. No ads, no 1,200-word backstory about a summer in Tuscany before you get to the ingredients.</p>
-        <p style="color:var(--ink-mid);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">Just the recipes. Organised by cuisine, filtered by time, saved with a heart.</p>
-        <p style="color:var(--ink-mid);line-height:1.8;font-size:0.95rem;">Add your own recipes using the <strong style="font-weight:500;color:var(--ink)">Add recipe</strong> button. Your collection lives in your browser and stays with you.</p>
-        <div style="margin-top:2.5rem;padding:1.5rem;background:var(--paper-warm);border-radius:14px;border:1px solid var(--border);">
-          <p style="font-size:0.8rem;color:var(--ink-light);line-height:1.7;">Built with care. Hosted on GitHub. Recipes belong to the people who cook them.</p>
-        </div>
-      </div>
-    </div>
-
-  </main>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-logo">Yummy</span>
   <span class="footer-text">Your personal recipe collection · no ads · no fluff</span>
 </footer>
 
-<!-- ADD RECIPE MODAL -->
-<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
-    </button>
-    <h2 class="modal-title">Add a recipe</h2>
-    <p class="modal-sub">Save a recipe to your collection</p>
-
-    <div class="form-group">
-      <label class="form-label">Recipe name *</label>
-      <input type="text" class="form-input" id="f-name" placeholder="e.g. Spaghetti alla Norma">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Cuisine</label>
-        <select class="form-select" id="f-cuisine">
-          <option value="">Choose…</option>
-          <option value="greek">Greek</option>
-          <option value="italian">Italian</option>
-          <option value="japanese">Japanese</option>
-          <option value="french">French</option>
-          <option value="indian">Indian</option>
-          <option value="mexican">Mexican</option>
-          <option value="spanish">Spanish</option>
-          <option value="thai">Thai</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Cook time</label>
-        <input type="text" class="form-input" id="f-time" placeholder="e.g. 30 min">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Serves</label>
-        <input type="text" class="form-input" id="f-serves" placeholder="e.g. 4">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Difficulty</label>
-        <select class="form-select" id="f-difficulty">
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Advanced">Advanced</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Description</label>
-      <textarea class="form-textarea" id="f-desc" placeholder="A short note about this recipe…"></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tags (comma separated)</label>
-      <input type="text" class="form-input" id="f-tags" placeholder="e.g. vegetarian, weekend, quick">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Emoji</label>
-      <input type="text" class="form-input" id="f-emoji" placeholder="🍝" maxlength="4">
-    </div>
-    <p id="f-error" style="color:var(--accent);font-size:0.8rem;display:none;margin-top:-0.5rem;">Please enter a recipe name.</p>
-    <div class="form-actions">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" onclick="saveRecipe()">Save recipe</button>
-    </div>
-  </div>
-</div>
-
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const DEFAULT_RECIPES = [
-  { id:'r1', name:'Gemista', cuisine:'greek', tags:'vegetarian weekend', time:90, timeLabel:'90 min', serves:'8', difficulty:'Easy', desc:'Tomatoes & peppers stuffed with herby rice, slow-roasted until caramelised and golden.', emoji:'🍅', href:'recipe.html?id=gemista', addedAt: 1 },
-  { id:'r2', name:'Horiatiki salad', cuisine:'greek', tags:'vegetarian quick', time:10, timeLabel:'10 min', serves:'4', difficulty:'Easy', desc:'The real village salad — no lettuce, just tomatoes, cucumber, olives, and a slab of feta.', emoji:'🥗', href:'recipe.html?id=horiatiki', addedAt: 2 },
-  { id:'r3', name:'Cacio e pepe', cuisine:'italian', tags:'vegetarian quick', time:20, timeLabel:'20 min', serves:'2', difficulty:'Medium', desc:'Three ingredients — pecorino romano, black pepper, pasta. The technique is everything.', emoji:'🍝', href:'recipe.html?id=cacio-e-pepe', addedAt: 3 },
-  { id:'r4', name:'Pizza Napoletana', cuisine:'italian', tags:'vegetarian weekend', time:4320, timeLabel:'3 days', serves:'4 pizzas', difficulty:'Medium', desc:'72-hour cold-fermented dough, San Marzano tomatoes, fior di latte. No substitutes.', emoji:'🍕', href:'recipe.html?id=pizza-napoletana', addedAt: 4 },
-  { id:'r5', name:'Shoyu ramen', cuisine:'japanese', tags:'weekend', time:180, timeLabel:'3 hrs', serves:'4', difficulty:'Advanced', desc:'A deeply savoury soy-based broth with chashu pork belly and a perfect soft marinated egg.', emoji:'🍜', href:'recipe.html?id=shoyu-ramen', addedAt: 5 },
-  { id:'r6', name:'Croissants', cuisine:'french', tags:'weekend', time:2880, timeLabel:'2 days', serves:'12', difficulty:'Hard', desc:'Laminated dough, butter on butter, shatteringly crisp. A weekend project worth every fold.', emoji:'🥐', href:'recipe.html?id=croissants', addedAt: 6 },
-];
+// ── RECIPE DATA ───────────────────────────────────────────────────────────────
+// All built-in recipes. User-added recipes fall back to a generic page.
+const RECIPES = {
+  'gemista': {
+    title: 'Gemista',
+    cuisine: 'Greek',
+    tags: 'vegetarian weekend',
+    emoji: '🍅',
+    desc: 'Tomatoes and peppers stuffed with herby, fragrant rice and slow-roasted until caramelised and collapsing at the edges. The olive oil pooling in the base of the dish is the best bit.',
+    prep: '30 min', cook: '60 min', total: '90 min', servesBase: 8, difficulty: 'Easy',
+    heroBg: '#F5DDD4',
+    ingredients: [
+      { amount: '8', unit: '', name: 'large ripe tomatoes' },
+      { amount: '4', unit: '', name: 'large green peppers' },
+      { amount: '300g', unit: '', name: 'long-grain rice, rinsed' },
+      { amount: '1', unit: '', name: 'large onion, finely grated' },
+      { amount: '4 cloves', unit: '', name: 'garlic, minced' },
+      { amount: '1 large bunch', unit: '', name: 'flat-leaf parsley, chopped' },
+      { amount: '1 small bunch', unit: '', name: 'fresh mint, chopped' },
+      { amount: '200ml', unit: '', name: 'good olive oil, divided' },
+      { amount: '400ml', unit: '', name: 'passata' },
+      { amount: '2 tsp', unit: '', name: 'sugar' },
+      { amount: '', unit: '', name: 'Salt & black pepper' },
+      { amount: '4', unit: '', name: 'medium potatoes, cut into wedges (optional)' },
+    ],
+    steps: [
+      { title: 'Hollow the vegetables', body: 'Slice the tops off the tomatoes and peppers; set tops aside. Using a teaspoon, carefully scoop out the tomato flesh and seeds into a bowl, leaving a 5mm shell. Remove the seeds and membranes from the peppers. Season the insides lightly with salt.' },
+      { title: 'Make the filling', body: 'Roughly chop the scooped tomato flesh. In a large bowl, combine the rice, grated onion, garlic, chopped parsley, mint, half the olive oil (100ml), the passata, the chopped tomato flesh, and the sugar. Season generously with salt and pepper. The filling should be well-seasoned and fairly loose — the rice absorbs liquid as it cooks.' },
+      { title: 'Fill and arrange', body: 'Arrange the hollowed tomatoes and peppers snugly in a large deep baking tin. Fill each one about ¾ full with the rice mixture — it will expand during cooking. Replace the tops like little hats. Tuck potato wedges around the vegetables if using, season them well. Pour any remaining filling and the rest of the olive oil over and around everything. Add a splash of water (about 100ml).' },
+      { title: 'Roast low and slow', body: 'Cover the tin tightly with foil and bake at 180°C (160°C fan) for 45 minutes. Remove the foil, raise the heat to 200°C, and roast for a further 25–30 minutes until the tops are golden, the vegetables are soft and slightly collapsed, and the rice is cooked through.' },
+      { title: 'Rest before serving', body: 'Leave the gemista to rest for at least 15 minutes before serving. They are excellent warm or at room temperature, and if anything better the next day. Serve with crusty bread to mop up the olive oil in the dish.' },
+    ],
+    notes: 'The key to properly cooked rice is not opening the foil too early. If the tops start browning too fast, tent loosely with foil. Leftovers keep for 3 days and reheat well. You can also use courgettes (cut in half lengthwise, hollowed) alongside the tomatoes and peppers.',
+  },
 
-const CUISINE_COLOURS = { greek:'#F5DDD4', italian:'#E4EBD0', japanese:'#FFF0E0', french:'#EAE4F5', indian:'#FFF4D8', mexican:'#F5F0DA', spanish:'#FDECD3', thai:'#E8F5E4', other:'#EEE8E0' };
+  'horiatiki': {
+    title: 'Horiatiki salad',
+    cuisine: 'Greek',
+    tags: 'vegetarian quick',
+    emoji: '🥗',
+    desc: 'The real Greek village salad. No lettuce — just chunky tomatoes, thick rounds of cucumber, Kalamata olives, and a whole slab of feta with dried oregano and good olive oil.',
+    prep: '10 min', cook: '–', total: '10 min', servesBase: 4, difficulty: 'Easy',
+    heroBg: '#F5DDD4',
+    ingredients: [
+      { amount: '4', unit: '', name: 'large ripe tomatoes, cut into wedges' },
+      { amount: '1', unit: '', name: 'cucumber, peeled and thickly sliced' },
+      { amount: '1', unit: '', name: 'green pepper, sliced into rings' },
+      { amount: '1 small', unit: '', name: 'red onion, thinly sliced' },
+      { amount: '100g', unit: '', name: 'Kalamata olives' },
+      { amount: '200g', unit: '', name: 'block of feta cheese' },
+      { amount: '5 tbsp', unit: '', name: 'extra-virgin olive oil' },
+      { amount: '1 tsp', unit: '', name: 'dried Greek oregano' },
+      { amount: '', unit: '', name: 'Salt & black pepper' },
+    ],
+    steps: [
+      { title: 'Prepare the vegetables', body: 'Cut the tomatoes into rough wedges and the cucumber into thick half-moons or rounds. Slice the green pepper into rings and the red onion into thin half-moons. Place everything in a large shallow bowl or on a plate.' },
+      { title: 'Add the olives', body: 'Scatter the Kalamata olives over the vegetables. Do not slice or pit them — whole olives are traditional and taste better.' },
+      { title: 'Add the feta', body: 'Place the whole block of feta on top of the salad. Do not crumble it. A whole slab is how it should be.' },
+      { title: 'Dress and serve', body: 'Drizzle the olive oil generously over everything — over the feta especially. Crumble the dried oregano between your fingers as you scatter it over the top. Season with a little salt (feta is salty so taste first) and plenty of black pepper. Serve immediately with bread.' },
+    ],
+    notes: 'The quality of tomatoes matters enormously here. Use the ripest, most flavourful tomatoes you can find — ideally left at room temperature, not refrigerated. This salad should not be made in advance; the tomatoes will water down and the feta will soften.',
+  },
 
-function loadRecipes() {
+  'cacio-e-pepe': {
+    title: 'Cacio e pepe',
+    cuisine: 'Italian',
+    tags: 'vegetarian quick',
+    emoji: '🍝',
+    desc: 'Three ingredients — pecorino romano, black pepper, pasta. The technique is everything: starchy pasta water emulsifies into a silky, clinging sauce. No butter, no cream, no shortcuts.',
+    prep: '5 min', cook: '15 min', total: '20 min', servesBase: 2, difficulty: 'Medium',
+    heroBg: '#E4EBD0',
+    ingredients: [
+      { amount: '200g', unit: '', name: 'tonnarelli or spaghetti' },
+      { amount: '80g', unit: '', name: 'Pecorino Romano, very finely grated' },
+      { amount: '20g', unit: '', name: 'Parmigiano Reggiano, very finely grated (optional)' },
+      { amount: '2 tsp', unit: '', name: 'whole black peppercorns' },
+      { amount: '', unit: '', name: 'Coarse salt for the pasta water' },
+    ],
+    steps: [
+      { title: 'Toast the pepper', body: 'Crack the peppercorns coarsely in a mortar or under a heavy pan — you want a rough grind, not a fine powder. Toast in a dry large frying pan over medium heat for 1–2 minutes until fragrant. Set pan aside.' },
+      { title: 'Cook the pasta', body: 'Boil the pasta in a pot of well-salted water — use less water than usual (about 1.5 litres) to make it extra starchy. Cook until 2 minutes short of al dente. Reserve 300ml of the cooking water before draining.' },
+      { title: 'Make the sauce', body: 'Add a ladle of pasta water to the pepper in the pan. Bring to a simmer over medium heat. Add the drained pasta and toss well, adding more pasta water as needed. The pasta should look quite wet at this point.' },
+      { title: 'Add the cheese', body: 'Remove the pan from the heat. Add the grated Pecorino (and Parmigiano if using) in two additions, tossing vigorously with a splash of pasta water. The residual heat and movement will melt the cheese into a smooth, emulsified sauce. If it clumps, add a little more pasta water and keep tossing. Serve immediately.' },
+    ],
+    notes: 'The cheese must be grated very finely — almost powdery — or it will clump rather than melt. Removing the pan from the heat before adding the cheese is critical. Leftovers do not keep well; make only what you will eat.',
+  },
+
+  'pizza-napoletana': {
+    title: 'Pizza Napoletana',
+    cuisine: 'Italian',
+    tags: 'vegetarian weekend',
+    emoji: '🍕',
+    desc: 'Four ingredients, a 72-hour cold ferment, and maximum oven heat. San Marzano tomatoes and fior di latte mozzarella. Stretch by hand — never a rolling pin.',
+    prep: '30 min', cook: '10 min', total: '3 days', servesBase: 4, difficulty: 'Medium',
+    heroBg: '#E4EBD0',
+    ingredients: [
+      { amount: '500g', unit: '', name: 'Tipo "00" flour' },
+      { amount: '325ml', unit: '', name: 'cold water' },
+      { amount: '10g', unit: '', name: 'fine sea salt' },
+      { amount: '0.5g', unit: '', name: 'active dried yeast (about ⅛ tsp)' },
+      { amount: '1 can (400g)', unit: '', name: 'San Marzano tomatoes' },
+      { amount: '300g', unit: '', name: 'fior di latte mozzarella, torn' },
+      { amount: '', unit: '', name: 'Good olive oil' },
+      { amount: '', unit: '', name: 'Fresh basil leaves' },
+      { amount: '', unit: '', name: 'Flaky sea salt' },
+    ],
+    steps: [
+      { title: 'Mix the dough (Day 1)', body: 'Dissolve the yeast in the cold water. In a large bowl, mix the flour with the salt, then pour in the yeast water. Mix until a shaggy dough forms, then knead for 10 minutes until smooth and elastic. Shape into a ball, cover tightly, and refrigerate for 24 hours.' },
+      { title: 'Ball the dough (Day 2)', body: 'Remove the dough from the fridge. Divide into 4 equal pieces (about 210g each). Shape each into a tight ball by folding the edges underneath. Place on a lightly floured tray, cover with a damp cloth, and return to the fridge for another 48 hours.' },
+      { title: 'Make the sauce', body: 'Crush the San Marzano tomatoes by hand or briefly blitz them — they should be slightly chunky, not smooth. Season with salt and a drizzle of olive oil. Do not cook the sauce.' },
+      { title: 'Heat the oven', body: 'Place a heavy baking steel or stone on the top rack of your oven. Set to maximum temperature (250°C+) and preheat for at least 1 hour. The hotter and longer, the better.' },
+      { title: 'Stretch and top', body: 'Remove a dough ball from the fridge 30 minutes before baking. On a lightly floured surface, use your fingers to press and stretch the dough from the centre outwards to a 30cm round, leaving a 2cm border. Transfer to a well-floured pizza peel. Spoon 2–3 tablespoons of sauce and spread thinly. Scatter with torn mozzarella.' },
+      { title: 'Bake', body: 'Slide the pizza onto the hot steel. Bake for 6–8 minutes until the crust is puffed and charred in spots and the cheese is bubbling. Add fresh basil immediately out of the oven, a drizzle of olive oil, and a pinch of flaky salt. Eat at once.' },
+    ],
+    notes: 'The cold, long fermentation is the whole point — it develops flavour and makes the dough much easier to stretch. Do not skip it. If you do not have a pizza steel, a cast iron pan works well: heat it on the hob until smoking before sliding the pizza in.',
+  },
+
+  'shoyu-ramen': {
+    title: 'Shoyu ramen',
+    cuisine: 'Japanese',
+    tags: 'weekend',
+    emoji: '🍜',
+    desc: 'A clear, deeply savoury soy-based broth built on chicken stock and dashi, topped with chashu pork belly, a soft marinated egg, nori, and bamboo shoots.',
+    prep: '45 min', cook: '3 hrs', total: '3 hrs', servesBase: 4, difficulty: 'Advanced',
+    heroBg: '#FFF0E0',
+    ingredients: [
+      { amount: '1kg', unit: '', name: 'chicken carcasses or wings' },
+      { amount: '10g', unit: '', name: 'kombu' },
+      { amount: '20g', unit: '', name: 'katsuobushi (bonito flakes)' },
+      { amount: '100ml', unit: '', name: 'soy sauce (shoyu)' },
+      { amount: '50ml', unit: '', name: 'mirin' },
+      { amount: '30ml', unit: '', name: 'sake' },
+      { amount: '600g', unit: '', name: 'pork belly, skin-on' },
+      { amount: '4', unit: '', name: 'soft-boiled eggs' },
+      { amount: '400g', unit: '', name: 'fresh ramen noodles' },
+      { amount: '200g', unit: '', name: 'menma (bamboo shoots), drained' },
+      { amount: '4 sheets', unit: '', name: 'nori' },
+      { amount: '4', unit: '', name: 'spring onions, sliced' },
+    ],
+    steps: [
+      { title: 'Make the chashu pork', body: 'Roll the pork belly tightly and tie with twine. In a heavy pot, sear all over in neutral oil. Add soy sauce, mirin, sake, and enough water to almost cover. Simmer on low heat for 2 hours, turning every 30 minutes. Remove, cool slightly, then refrigerate in the braising liquid overnight if possible. Slice thinly before serving.' },
+      { title: 'Make the tare', body: 'Combine 100ml soy sauce, 50ml mirin, and 30ml sake in a small saucepan. Bring to a simmer and cook for 5 minutes. Cool and reserve. This is your seasoning base.' },
+      { title: 'Make the chicken broth', body: 'Place chicken bones in cold water, bring to a boil, drain and rinse. Return to a clean pot with 2.5 litres fresh cold water. Bring to a gentle simmer and cook for 2 hours, skimming regularly. Strain and discard solids.' },
+      { title: 'Make the dashi', body: 'In a separate pot, soak the kombu in 500ml cold water for 30 minutes, then heat gently until almost simmering (don\'t boil). Remove kombu, add the bonito flakes, steep for 5 minutes, then strain.' },
+      { title: 'Combine the broth', body: 'Mix the chicken broth and dashi. Season with tare a little at a time, tasting as you go — you want deeply savoury but not salty. Keep warm.' },
+      { title: 'Marinate the eggs', body: 'Peel the soft-boiled eggs (just-set yolk: 6.5 minutes from boiling) and soak in a mixture of equal parts soy sauce and mirin diluted with a little water, for at least 2 hours.' },
+      { title: 'Assemble the bowls', body: 'Cook the noodles per packet instructions. Warm your bowls. Add noodles, ladle the hot broth over, then arrange the chashu slices, a halved marinated egg, bamboo shoots, nori, and spring onions. Serve immediately.' },
+    ],
+    notes: 'Ramen rewards patience. The broth can be made a day ahead and actually improves overnight. The chashu is even better sliced cold from the fridge and then briefly torched or seared. Fresh ramen noodles from an Asian grocery are significantly better than dried.',
+  },
+
+  'croissants': {
+    title: 'Croissants',
+    cuisine: 'French',
+    tags: 'weekend',
+    emoji: '🥐',
+    desc: 'Laminated dough — butter worked into layers upon layers. The result is shatteringly crisp on the outside, honeycomb soft within. A two-day project that is absolutely worth it.',
+    prep: '3 hrs', cook: '20 min', total: '2 days', servesBase: 12, difficulty: 'Hard',
+    heroBg: '#EAE4F5',
+    ingredients: [
+      { amount: '500g', unit: '', name: 'strong white bread flour' },
+      { amount: '10g', unit: '', name: 'fine salt' },
+      { amount: '80g', unit: '', name: 'caster sugar' },
+      { amount: '10g', unit: '', name: 'fast-action yeast' },
+      { amount: '300ml', unit: '', name: 'whole milk, cold' },
+      { amount: '280g', unit: '', name: 'cold unsalted butter, for lamination' },
+      { amount: '1', unit: '', name: 'egg, beaten, for egg wash' },
+    ],
+    steps: [
+      { title: 'Make the dough (Day 1)', body: 'Combine flour, salt, sugar, yeast, and cold milk in a stand mixer. Mix until a smooth dough forms — about 5 minutes on medium. Shape into a flat rectangle, wrap in cling film, and refrigerate for 8–12 hours (overnight).' },
+      { title: 'Prepare the butter block', body: 'Place the cold butter between two sheets of baking paper. Beat with a rolling pin and shape into a 20×20cm square, about 1cm thick. Refrigerate until cold but pliable — it should bend slightly without cracking.' },
+      { title: 'First lamination (Day 2)', body: 'Roll the chilled dough out to a 40×20cm rectangle. Place the butter block in the centre. Fold the dough edges over to enclose the butter completely. Press the edges to seal. Roll out lengthwise to 60×20cm. Fold in three (like a letter). Wrap and refrigerate for 30 minutes.' },
+      { title: 'Continue folding', body: 'Repeat the rolling and folding process twice more, refrigerating for 30 minutes between each fold. You will have done 3 folds total. After the final fold, refrigerate for 1 hour.' },
+      { title: 'Shape', body: 'Roll the dough to 4mm thickness. Cut into long triangles with a base of about 10cm. Make a small notch at the centre of the base of each triangle. Gently stretch the triangle, then roll from base to point, keeping it tight. Curve the ends in slightly. Place on lined baking trays with the point underneath.' },
+      { title: 'Prove and bake', body: 'Prove at cool room temperature (ideally 20°C) for 2–4 hours until noticeably puffed and wobbly when shaken. Brush gently with beaten egg. Bake at 200°C (180°C fan) for 18–22 minutes until a deep golden brown. Cool on a rack for at least 15 minutes before eating.' },
+    ],
+    notes: 'Butter temperature is everything — too warm and it will absorb into the dough, destroying the layers; too cold and it will crack and shatter. Aim for 16–18°C. On a warm day, keep everything as cold as possible. Under-proving is a common mistake; the croissants should look significantly larger than when shaped.',
+  },
+};
+
+// ── URL PARAMS ────────────────────────────────────────────────────────────────
+const params  = new URLSearchParams(window.location.search);
+const recipeId = params.get('id') || 'gemista';
+
+// Try built-in recipes first, then user-added recipes
+let RECIPE = RECIPES[recipeId];
+
+if (!RECIPE) {
+  // Look up user-added recipes from localStorage
   try {
-    const stored = localStorage.getItem('yummy_recipes');
-    return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_RECIPES));
-  } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_RECIPES)); }
-}
-function saveRecipes(arr) {
-  try { localStorage.setItem('yummy_recipes', JSON.stringify(arr)); } catch(e){}
-}
-function loadFavs() {
-  try { return JSON.parse(localStorage.getItem('yummy_favs') || '[]'); } catch(e){ return []; }
-}
-function saveFavs(arr) {
-  try { localStorage.setItem('yummy_favs', JSON.stringify(arr)); } catch(e){}
-}
-
-let recipes = loadRecipes();
-let favs    = loadFavs();
-let activeFilter = 'all';
-let activeView   = 'all';
-let activeSearch = '';
-
-// ── RENDER ────────────────────────────────────────────────────────────────────
-function cuisineThumb(c) { return CUISINE_COLOURS[c] || '#EEE8E0'; }
-
-function cardHTML(r, inFavGrid) {
-  const isFav  = favs.includes(r.id);
-  const favCls = isFav ? 'card-fav active' : 'card-fav';
-  const svgFill = isFav ? 'currentColor' : 'none';
-  const href   = r.href || `recipe.html?id=${r.id}`;
-  return `
-    <a href="${href}" class="recipe-card" data-id="${r.id}" data-cuisine="${r.cuisine}" data-tags="${r.tags||''}" data-time="${r.time||999}">
-      <div class="card-thumb" style="background:${cuisineThumb(r.cuisine)}">
-        ${r.emoji||'🍽️'}
-        <span class="card-badge">${capitalise(r.cuisine)}</span>
-        <div class="${favCls}" onclick="toggleFav(event,'${r.id}')">
-          <svg viewBox="0 0 16 16" fill="${svgFill}" stroke="currentColor" stroke-width="1.5"><path d="M8 13.5S2 9.5 2 5.5A3.5 3.5 0 018 3a3.5 3.5 0 016 2c0 4-6 8.5-6 8.5z"/></svg>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-cuisine">${capitalise(r.cuisine)}${r.tags&&r.tags.includes('vegetarian')?' · Vegetarian':''}</div>
-        <div class="card-title">${r.name}</div>
-        <div class="card-desc">${r.desc||''}</div>
-        <div class="card-meta">
-          <div class="card-meta-item">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 2"/></svg>
-            ${r.timeLabel||'–'}
-          </div>
-          <div class="card-meta-item">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13V7a5 5 0 0110 0v6"/><path d="M1 13h14"/></svg>
-            Serves ${r.serves||'?'}
-          </div>
-          <div class="card-meta-item" style="margin-left:auto;">${r.difficulty||'Easy'}</div>
-        </div>
-      </div>
-    </a>`;
+    const stored = JSON.parse(localStorage.getItem('yummy_recipes') || '[]');
+    const found  = stored.find(r => r.id === recipeId);
+    if (found) {
+      RECIPE = {
+        title:      found.name,
+        cuisine:    found.cuisine ? found.cuisine.charAt(0).toUpperCase()+found.cuisine.slice(1) : 'Other',
+        tags:       found.tags || '',
+        emoji:      found.emoji || '🍽️',
+        desc:       found.desc || '',
+        prep:       '–', cook: found.timeLabel || '–', total: found.timeLabel || '–',
+        servesBase: parseInt(found.serves) || 4,
+        difficulty: found.difficulty || 'Easy',
+        heroBg:     '#EEE8E0',
+        ingredients: [],
+        steps: [{ title: 'Recipe added', body: 'This recipe was added manually. Full instructions can be added by editing this recipe or by keeping them in your own notes.' }],
+        notes: null,
+      };
+    }
+  } catch(e){}
 }
 
-function addCardHTML() {
-  return `<button class="card-add" onclick="openModal()">
-    <div class="card-add-icon"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v12M3 9h12"/></svg></div>
-    <p>Add a recipe</p>
-    <small>Paste a URL or write your own</small>
-  </button>`;
-}
-
-function emptyHTML(msg, sub) {
-  return `<div class="empty-state">
-    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" style="display:block;margin:0 auto 1rem"><circle cx="20" cy="20" r="16"/><path d="M20 14v6l4 4"/></svg>
-    <h3>${msg}</h3><p>${sub}</p>
-  </div>`;
-}
-
-function capitalise(s) { return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
-
-function getFilteredRecipes() {
-  return recipes.filter(r => {
-    const cuisine = r.cuisine || '';
-    const tags    = r.tags || '';
-    const time    = r.time || 999;
-    const name    = (r.name || '').toLowerCase();
-    const desc    = (r.desc || '').toLowerCase();
-    const search  = activeSearch.toLowerCase();
-
-    const matchFilter =
-      activeFilter === 'all' ||
-      cuisine === activeFilter ||
-      (activeFilter === 'vegetarian' && tags.includes('vegetarian')) ||
-      (activeFilter === 'quick' && time <= 30) ||
-      (activeFilter === 'weekend' && tags.includes('weekend'));
-
-    const matchSearch = !search || name.includes(search) || cuisine.includes(search) || desc.includes(search) || tags.includes(search);
-
-    return matchFilter && matchSearch;
-  });
-}
-
-function renderGrid() {
-  const grid      = document.getElementById('recipe-grid');
-  const countEl   = document.getElementById('recipe-count');
-  const sortVal   = document.getElementById('sort-select').value;
-  let   filtered  = getFilteredRecipes();
-
-  // Sort
-  if (sortVal === 'az')      filtered.sort((a,b) => a.name.localeCompare(b.name));
-  else if (sortVal === 'time')    filtered.sort((a,b) => (a.time||999) - (b.time||999));
-  else if (sortVal === 'cuisine') filtered.sort((a,b) => a.cuisine.localeCompare(b.cuisine));
-  else                             filtered.sort((a,b) => (b.addedAt||0) - (a.addedAt||0));
-
-  if (filtered.length === 0) {
-    grid.innerHTML = emptyHTML('No recipes found', 'Try a different search or filter.');
-  } else {
-    grid.innerHTML = filtered.map(r => cardHTML(r, false)).join('') + addCardHTML();
-  }
-  countEl.textContent = filtered.length + ' recipe' + (filtered.length !== 1 ? 's' : '');
-}
-
-function renderFavGrid() {
-  const grid   = document.getElementById('fav-grid');
-  const count  = document.getElementById('fav-count');
-  const favRec = recipes.filter(r => favs.includes(r.id));
-  if (favRec.length === 0) {
-    grid.innerHTML = emptyHTML('No favourites yet', 'Tap the ♥ on any recipe to save it here.');
-  } else {
-    grid.innerHTML = favRec.map(r => cardHTML(r, true)).join('');
-  }
-  count.textContent = favRec.length + ' recipe' + (favRec.length !== 1 ? 's' : '');
-}
-
-function updateStats() {
-  const cuisineSet = new Set(recipes.map(r => r.cuisine));
-  const validTimes = recipes.filter(r => r.time && r.time < 1440).map(r => r.time);
-  const avgMin     = validTimes.length ? Math.round(validTimes.reduce((a,b)=>a+b,0)/validTimes.length) : null;
-  let avgLabel     = '—';
-  if (avgMin) { avgLabel = avgMin >= 60 ? Math.round(avgMin/60)+'<span>h</span>' : avgMin+'<span>m</span>'; }
-
-  document.getElementById('stat-total').textContent    = recipes.length;
-  document.getElementById('stat-cuisines').textContent = cuisineSet.size;
-  document.getElementById('stat-favs').textContent     = favs.length;
-  document.getElementById('stat-time').innerHTML       = avgLabel;
-
-  // Sidebar counts
-  document.getElementById('aside-count-all').textContent  = recipes.length;
-  document.getElementById('aside-count-favs').textContent = favs.length;
-  ['greek','italian','japanese','french'].forEach(c => {
-    const el = document.getElementById('cuisine-count-'+c);
-    if (el) el.textContent = recipes.filter(r=>r.cuisine===c).length;
-  });
-}
-
-function renderAll() { renderGrid(); renderFavGrid(); updateStats(); }
-
-// ── FILTER & SEARCH ───────────────────────────────────────────────────────────
-function setFilter(btn, type) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  activeFilter = type;
-  showView('all', document.getElementById('nav-all'));
-  renderGrid();
-}
-
-function sidebarFilter(tag) {
-  // Activate matching pill or just set filter
-  activeFilter = tag;
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  // find matching pill
-  const pill = [...document.querySelectorAll('.filter-pill')].find(p => p.getAttribute('onclick') && p.getAttribute('onclick').includes("'"+tag+"'"));
-  if (pill) pill.classList.add('active');
-  showView('all', document.getElementById('nav-all'));
-  renderGrid();
-}
-
-function handleSearch(input) {
-  activeSearch = input.value;
-  const clearBtn = document.getElementById('search-clear');
-  clearBtn.style.display = activeSearch ? 'flex' : 'none';
-  if (activeView !== 'all') showView('all', document.getElementById('nav-all'));
-  renderGrid();
-}
-
-function clearSearch() {
-  const input = document.getElementById('search-input');
-  input.value = '';
-  activeSearch = '';
-  document.getElementById('search-clear').style.display = 'none';
-  renderGrid();
-}
-
-function sortRecipes(val) {
-  const sel = document.getElementById('sort-select');
-  if (val !== 'recent' && sel) sel.value = val;
-  else if (sel) sel.value = 'recent';
-  showView('all', document.getElementById('nav-all'));
-  renderGrid();
-}
-
-// ── VIEWS ─────────────────────────────────────────────────────────────────────
-function showView(view, navEl) {
-  activeView = view;
-  ['all','favourites','collections','about'].forEach(v => {
-    document.getElementById('view-'+v).style.display = v === view ? '' : 'none';
-  });
-
-  // Nav active state
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  if (navEl) navEl.classList.add('active');
-
-  // Sidebar active
-  document.querySelectorAll('.aside-item').forEach(a => a.classList.remove('active'));
-  if (view === 'all')         document.getElementById('aside-all').classList.add('active');
-  if (view === 'favourites')  document.getElementById('aside-favs').classList.add('active');
-
-  if (view === 'favourites') renderFavGrid();
-  if (view === 'all')        renderGrid();
+if (!RECIPE) {
+  // Fallback: unknown recipe
+  document.title = 'Recipe not found — Yummy';
+  document.querySelector('.recipe-title').textContent = 'Recipe not found';
+  document.querySelector('.recipe-desc').textContent = 'This recipe does not exist yet.';
 }
 
 // ── FAVOURITES ────────────────────────────────────────────────────────────────
-function toggleFav(e, id) {
-  e.preventDefault(); e.stopPropagation();
-  if (favs.includes(id)) { favs = favs.filter(f => f !== id); }
-  else { favs.push(id); }
+function loadFavs() { try { return JSON.parse(localStorage.getItem('yummy_favs')||'[]'); } catch(e){ return []; } }
+function saveFavs(arr) { try { localStorage.setItem('yummy_favs', JSON.stringify(arr)); } catch(e){} }
+let favs = loadFavs();
+const favBtn = document.getElementById('fav-btn');
+
+function updateFavBtn() {
+  const isFav = favs.includes(recipeId);
+  favBtn.classList.toggle('active', isFav);
+  favBtn.querySelector('svg').setAttribute('fill', isFav ? 'currentColor' : 'none');
+  favBtn.querySelector('svg').style.color = isFav ? 'var(--accent)' : '';
+  const textNode = [...favBtn.childNodes].find(n => n.nodeType === 3);
+  if (textNode) textNode.nodeValue = isFav ? ' Saved' : ' Save';
+}
+
+function toggleFav() {
+  if (favs.includes(recipeId)) { favs = favs.filter(f => f !== recipeId); }
+  else { favs.push(recipeId); }
   saveFavs(favs);
+  updateFavBtn();
+}
 
-  // Update all fav buttons for this id
-  document.querySelectorAll(`.card-fav`).forEach(btn => {
-    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'"+id+"'")) {
-      const isFav = favs.includes(id);
-      btn.classList.toggle('active', isFav);
-      btn.querySelector('svg').setAttribute('fill', isFav ? 'currentColor' : 'none');
-    }
+// ── SERVES ADJUSTMENT ─────────────────────────────────────────────────────────
+let currentServes = RECIPE ? RECIPE.servesBase : 4;
+
+function adjustServes(delta) {
+  const newVal = Math.max(1, currentServes + delta);
+  currentServes = newVal;
+  document.getElementById('serves-display').textContent = newVal;
+  document.getElementById('m-serves').textContent = newVal;
+  renderIngredients();
+}
+
+// ── INGREDIENTS ───────────────────────────────────────────────────────────────
+function scaleAmount(amountStr, ratio) {
+  if (!amountStr) return '';
+  // Try to scale numeric parts
+  return amountStr.replace(/[\d.]+/g, n => {
+    const scaled = parseFloat(n) * ratio;
+    if (scaled === Math.floor(scaled)) return scaled;
+    return Math.round(scaled * 4) / 4; // round to nearest quarter
   });
-
-  updateStats();
-  if (activeView === 'favourites') renderFavGrid();
 }
 
-// ── MODAL ─────────────────────────────────────────────────────────────────────
-function openModal() {
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('f-name').focus(), 200);
-}
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-  // Reset form
-  ['f-name','f-time','f-serves','f-desc','f-tags','f-emoji'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('f-cuisine').value = '';
-  document.getElementById('f-difficulty').value = 'Easy';
-  document.getElementById('f-error').style.display = 'none';
-}
-function handleOverlayClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
-
-function saveRecipe() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) { document.getElementById('f-error').style.display = 'block'; return; }
-  document.getElementById('f-error').style.display = 'none';
-
-  const timeStr  = document.getElementById('f-time').value.trim();
-  const timeMin  = parseTimeToMin(timeStr);
-  const id       = 'r_' + Date.now();
-  const newRec   = {
-    id, name,
-    cuisine:    document.getElementById('f-cuisine').value || 'other',
-    tags:       document.getElementById('f-tags').value.toLowerCase().replace(/,\s*/g,' '),
-    time:       timeMin,
-    timeLabel:  timeStr || '–',
-    serves:     document.getElementById('f-serves').value.trim() || '?',
-    difficulty: document.getElementById('f-difficulty').value,
-    desc:       document.getElementById('f-desc').value.trim(),
-    emoji:      document.getElementById('f-emoji').value.trim() || '🍽️',
-    href:       `recipe.html?id=${id}`,
-    addedAt:    Date.now(),
-  };
-  recipes.unshift(newRec);
-  saveRecipes(recipes);
-  closeModal();
-  showView('all', document.getElementById('nav-all'));
-  activeFilter = 'all';
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  document.querySelector('.filter-pill').classList.add('active');
-  renderAll();
+function renderIngredients() {
+  const list  = document.getElementById('ingredient-list');
+  if (!RECIPE.ingredients || RECIPE.ingredients.length === 0) {
+    list.innerHTML = '<li style="padding:1rem 0;color:var(--ink-light);font-size:0.875rem;">No ingredients listed yet.</li>';
+    return;
+  }
+  const ratio = currentServes / (RECIPE.servesBase || 1);
+  list.innerHTML = RECIPE.ingredients.map((ing, i) => {
+    const scaled = scaleAmount(ing.amount, ratio);
+    return `<li class="ingredient-item" onclick="toggleIngredient(this)">
+      <div class="ingredient-check"><svg viewBox="0 0 10 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4l3 3 5-6"/></svg></div>
+      <span class="ingredient-amount">${scaled}${ing.unit}</span>
+      <span class="ingredient-name">${ing.name}</span>
+    </li>`;
+  }).join('');
 }
 
-function parseTimeToMin(str) {
-  if (!str) return 999;
-  str = str.toLowerCase();
-  if (str.includes('day')) { const n=parseFloat(str); return isNaN(n)?999:n*1440; }
-  if (str.includes('hr') || str.includes('hour')) { const n=parseFloat(str); return isNaN(n)?999:n*60; }
-  const n = parseFloat(str);
-  return isNaN(n) ? 999 : n;
+function toggleIngredient(el) {
+  el.classList.toggle('checked');
 }
 
-// ── KEYBOARD ──────────────────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-  if ((e.key==='k'||e.key==='K') && (e.metaKey||e.ctrlKey)) { e.preventDefault(); document.getElementById('search-input').focus(); }
-});
+// ── STEPS ─────────────────────────────────────────────────────────────────────
+function renderSteps() {
+  const container = document.getElementById('steps-list');
+  container.innerHTML = RECIPE.steps.map((s, i) => `
+    <div class="step">
+      <div class="step-num">${i+1}</div>
+      <div class="step-content">
+        <div class="step-title">${s.title}</div>
+        <div class="step-body">${s.body}</div>
+      </div>
+    </div>
+  `).join('');
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
-renderAll();
+  if (RECIPE.notes) {
+    document.getElementById('notes-block').style.display = '';
+    document.getElementById('notes-text').textContent = RECIPE.notes;
+  }
+}
+
+// ── POPULATE ──────────────────────────────────────────────────────────────────
+function populate() {
+  if (!RECIPE) {
+    document.title = 'Recipe not found — Yummy';
+    document.getElementById('r-title').textContent   = 'Recipe not found';
+    document.getElementById('r-desc').textContent    = 'This recipe doesn\'t exist yet.';
+    document.getElementById('r-cuisine').textContent = '';
+    document.getElementById('r-emoji').textContent   = '🍽️';
+    document.getElementById('ingredient-list').innerHTML = '<li style="padding:1rem 0;color:var(--ink-light);font-size:0.875rem;">No ingredients listed.</li>';
+    document.getElementById('steps-list').innerHTML  = '<p style="color:var(--ink-light);">No instructions found.</p>';
+    return;
+  }
+  document.title = RECIPE.title + ' — Yummy';
+
+  const isVeg  = (RECIPE.tags||'').includes('vegetarian');
+  document.getElementById('r-cuisine').textContent  = RECIPE.cuisine + (isVeg ? ' · Vegetarian' : '');
+  document.getElementById('r-title').textContent    = RECIPE.title;
+  document.getElementById('r-desc').textContent     = RECIPE.desc;
+  document.getElementById('r-emoji').textContent    = RECIPE.emoji;
+  document.getElementById('recipe-hero').style.background = 'var(--ink)';
+
+  document.getElementById('m-prep').textContent       = RECIPE.prep || '–';
+  document.getElementById('m-cook').textContent       = RECIPE.cook || '–';
+  document.getElementById('m-total').textContent      = RECIPE.total || '–';
+  document.getElementById('m-serves').textContent     = RECIPE.servesBase;
+  document.getElementById('m-difficulty').textContent = RECIPE.difficulty;
+  document.getElementById('serves-display').textContent = RECIPE.servesBase;
+
+  renderIngredients();
+  renderSteps();
+  updateFavBtn();
+}
+
+populate();
 </script>
 </body>
 </html>
